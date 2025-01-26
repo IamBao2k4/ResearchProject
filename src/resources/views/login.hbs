@@ -1,0 +1,84 @@
+<main id="login">
+    <div class="login-header">
+        <div class="login-introduce">
+            <h1 class="login-title">Login</h1>
+            <div class="login-breadcrumb">
+                <a href="/">Home</a>
+                <img src="/img/arrow_right.svg" alt="" /> 
+                <p>Login</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-body">
+        <div class="login-container">
+            <h2 class="sub-title">Login</h2>
+
+            <div class="notification">
+                <i class="fa-solid fa-check"></i>
+                <p class="notification-text"></p>
+            </div>
+
+            <p class="title-form">Insert your account information:</p>
+
+            <form id="login-form" action="/login" method="POST">
+                <div class="input-group form-email">
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        value="{{rememberedEmail}}"
+                        required
+                    />
+
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div class="input-group form-password">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    />
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <div class="hide_show_password">
+                        <div class="hide">
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="login-option-field">
+                    <span class="login-checkbox">
+                        <input
+                            type="checkbox"
+                            id="login-check"
+                            name="rememberMe"
+                        />
+                        <label for="login-check">Remember me</label>
+                    </span>
+
+                    <a href="/forgot-password" class="forgot_pw">Forgot
+                        password?</a>
+                </div>
+
+                <button class="button login-btn" type="submit">LOGIN NOW</button>
+
+                <a href="/auth/google" class="button login-social-btn">
+                    <img src="/images/google.svg" alt="" />
+                    <p>Or login with Google</p>
+                </a>
+            </form>
+
+            <p class="login-register">Don't have an account?
+                <a href="/register" class="register-link">Register Here</a></p>
+        </div>
+    </div>
+</main>
+
+<script src="/script/login.js"></script>

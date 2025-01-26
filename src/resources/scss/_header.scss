@@ -1,0 +1,40 @@
+#header {
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+
+    div {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+
+        h1 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        nav {
+            ul {
+                list-style: none;
+                display: flex;
+                gap: 1rem;
+
+                li {
+                    a {
+                        text-decoration: none;
+                        color: #007bff;
+                        font-size: 1rem;
+                        transition: color 0.3s;
+
+                        &:hover {
+                            color: #0056b3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
