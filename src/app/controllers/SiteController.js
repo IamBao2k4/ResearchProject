@@ -1,3 +1,6 @@
+const { render } = require("../../app");
+
+
 class SiteController{
 
     // [GET] /
@@ -5,9 +8,9 @@ class SiteController{
         res.render('login');
     }
 
-    // [GET] /search
-    search(req, res){
-        res.render('search');
+    // [GET] /home
+    home(req, res){
+        res.render('home');
     }
 }
 

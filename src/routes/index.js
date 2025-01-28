@@ -3,7 +3,7 @@ const siteRouter = require("./site");
 const authRouter = require("./auth");
 
 function route(app) {
-    app.get("/", siteRouter);
+    app.use("/", siteRouter);
 
     app.use("/api", apiRouter);
 
