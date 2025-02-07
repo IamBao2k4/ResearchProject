@@ -7,11 +7,7 @@ const connectionString = process.env.CONNECTION_STRING;
 async function connect() {
     try {
         await mongoose.connect(
-            connectionString,
-            {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            }
+            connectionString
         );
         console.log("Connect Successfully!!!");
     } catch (error) {

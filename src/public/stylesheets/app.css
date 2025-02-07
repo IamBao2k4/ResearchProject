@@ -255,6 +255,407 @@ select {
   color: #b88e2f;
 }
 
+#register .register-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 316px;
+  background-image: url(/img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom center;
+}
+@media (max-width: 768px) {
+  #register .register-header {
+    height: 200px;
+  }
+}
+#register .register-header .register-introduce {
+  text-align: center;
+}
+#register .register-header .register-introduce .register-title {
+  font-size: 4.8rem;
+  font-weight: 500;
+}
+@media (max-width: 768px) {
+  #register .register-header .register-introduce .register-title {
+    font-size: 3.6rem;
+  }
+}
+#register .register-header .register-introduce .register-breadcrumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+#register .register-header .register-introduce .register-breadcrumb a {
+  font-weight: 500;
+  color: #000;
+}
+#register .register-body {
+  position: relative;
+}
+#register .register-body .register-container {
+  width: 40%;
+  padding: 50px 0;
+  margin: auto;
+}
+@media (max-width: 1024px) {
+  #register .register-body .register-container {
+    width: 60%;
+  }
+}
+@media (max-width: 768px) {
+  #register .register-body .register-container {
+    width: 80%;
+  }
+}
+@media (max-width: 480px) {
+  #register .register-body .register-container {
+    width: 90%;
+    padding: 30px 0;
+  }
+}
+#register .register-body .register-container .sub-title {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e5e8;
+  font-weight: 700;
+  position: relative;
+}
+#register .register-body .register-container .sub-title::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 1.5px;
+  background: #b88e2f;
+  position: absolute;
+  bottom: -1px;
+}
+#register .register-body .register-container #register-form {
+  margin-top: 15px;
+}
+#register .register-body .register-container #register-form .group {
+  width: 88%;
+  margin: 30px auto 0;
+}
+@media (max-width: 480px) {
+  #register .register-body .register-container #register-form .group {
+    width: 100%;
+  }
+}
+#register .register-body .register-container #register-form .group .input-group {
+  position: relative;
+}
+#register .register-body .register-container #register-form .group .input-group input {
+  width: 100%;
+  padding: 25px 0 25px 70px;
+  border: 1px solid #9f9f9f;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #9f9f9f;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+@media (max-width: 480px) {
+  #register .register-body .register-container #register-form .group .input-group input {
+    padding: 20px 0 20px 60px;
+    font-size: 1.4rem;
+  }
+}
+#register .register-body .register-container #register-form .group .input-group input:focus {
+  border-color: #b88e2f;
+}
+#register .register-body .register-container #register-form .group .input-group input:focus ~ .fa-envelope, #register .register-body .register-container #register-form .group .input-group input:focus ~ .fa-lock {
+  color: #b88e2f;
+}
+#register .register-body .register-container #register-form .group .input-group i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #cbcbcb;
+  font-size: 2rem;
+  left: 13px;
+}
+@media (max-width: 480px) {
+  #register .register-body .register-container #register-form .group .input-group i {
+    font-size: 1.8rem;
+    left: 10px;
+  }
+}
+#register .register-body .register-container #register-form .group .input-group::after {
+  content: "";
+  width: 6px;
+  height: 44px;
+  background: url(/img/icon_popup_login.png);
+  background-position: -19px 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 48px;
+}
+@media (max-width: 480px) {
+  #register .register-body .register-container #register-form .group .input-group::after {
+    left: 40px;
+  }
+}
+#register .register-body .register-container #register-form .group .input-group .hide_show_password {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10%;
+}
+#register .register-body .register-container #register-form .group.invalid input {
+  border-color: #d93025;
+}
+#register .register-body .register-container #register-form .group.invalid .error {
+  display: flex;
+}
+#register .register-body .register-container #register-form .group .error {
+  display: none;
+  align-items: baseline;
+  margin-top: 6px;
+  font-size: 1.3rem;
+  color: #d93025;
+}
+#register .register-body .register-container #register-form .group .error .fa-circle-exclamation {
+  margin-right: 6px;
+  font-size: 1.5rem;
+}
+#register .register-body .register-container #register-form .group .error .error-text {
+  line-height: 1.5;
+}
+#register .register-body .register-container #register-form .register-btn {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #b88e2f;
+  margin: 30px auto 0;
+  border-radius: 5px;
+  font-weight: 700;
+  color: #fff;
+  background: #b88e2f;
+  transition: 0.5s ease;
+}
+#register .register-body .register-container #register-form .register-btn:hover {
+  color: #b88e2f;
+  background: #fff;
+}
+@media (max-width: 480px) {
+  #register .register-body .register-container #register-form .register-btn {
+    height: 45px;
+    font-size: 1.4rem;
+  }
+}
+#register .register-body .register-container .register-login {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #9f9f9f;
+}
+#register .register-body .register-container .register-login .login-link {
+  font-weight: 700;
+  color: #6aa1da;
+  margin-left: 6px;
+  transition: 0.3s ease;
+}
+#register .register-body .register-container .register-login .login-link:hover {
+  color: #b88e2f;
+}
+
+#forgot-password .forgot-password-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 316px;
+  background-image: url(/img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom center;
+}
+
+#forgot-password .forgot-password-header .forgot-password-title {
+  font-size: 4.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+#forgot-password .forgot-password-header .forgot-password-breadcrumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+#forgot-password .forgot-password-breadcrumb a {
+  font-weight: 500;
+  color: #000;
+}
+
+#forgot-password .forgot-password-body .forgot-password-container {
+  width: 40%;
+  padding: 50px 0;
+  margin: auto;
+}
+
+#forgot-password .forgot-password-container .sub-title {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e5e8;
+  font-weight: 700;
+  position: relative;
+}
+
+#forgot-password .forgot-password-container .sub-title::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 1.5px;
+  background: #b88e2f;
+  position: absolute;
+  bottom: -1px;
+}
+
+#forgot-password .forgot-password-container .title-form {
+  margin-top: 15px;
+  font-size: 1.3rem;
+}
+
+#forgot-password .forgot-password-container #forgot-password-form {
+  margin-top: 15px;
+}
+
+#forgot-password #forgot-password-form .group {
+  width: 88%;
+  margin: auto;
+}
+
+#forgot-password #forgot-password-form .input-group {
+  position: relative;
+}
+
+#forgot-password #forgot-password-form .fa-envelope {
+  font-size: 2rem;
+  color: #cbcbcb;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 13px;
+}
+
+#forgot-password #forgot-password-form input {
+  width: 100%;
+  padding: 25px 0;
+  padding-left: 70px;
+  border: 1px solid #9f9f9f;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #9f9f9f;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+#forgot-password #forgot-password-form .invalid input {
+  border-color: #d93025;
+}
+
+#forgot-password #forgot-password-form input:focus {
+  border-color: #b88e2f;
+}
+
+#forgot-password #forgot-password-form input:focus ~ .fa-envelope {
+  color: #b88e2f;
+}
+
+#forgot-password #forgot-password-form .input-group::after {
+  content: "";
+  width: 6px;
+  height: 44px;
+  background: url(/img/icon_popup_login.png);
+  background-position: -19px 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 48px;
+}
+
+#forgot-password #forgot-password-form .error {
+  display: flex;
+  align-items: baseline;
+  margin-top: 6px;
+  font-size: 1.3rem;
+  color: #d93025;
+  display: none;
+}
+
+#forgot-password #forgot-password-form .invalid .error {
+  display: flex;
+}
+
+#forgot-password #forgot-password-form .error .fa-circle-exclamation {
+  margin-right: 6px;
+  font-size: 1.5rem;
+}
+
+#forgot-password #forgot-password-form .error .error-text {
+  line-height: 1.5;
+}
+
+#forgot-password .forgot-password-container .forgot-password-btn {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #b88e2f;
+  margin: 30px auto 0;
+  border-radius: 5px;
+  font-weight: 700;
+  color: #fff;
+  background: #b88e2f;
+  transition: 0.5s ease;
+}
+
+#forgot-password .forgot-password-container .forgot-password-btn:hover {
+  color: #b88e2f;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  #forgot-password .forgot-password-header {
+    height: 200px;
+    background-position: center;
+  }
+  #forgot-password .forgot-password-header .forgot-password-title {
+    font-size: 3rem;
+  }
+  #forgot-password .forgot-password-body .forgot-password-container {
+    width: 90%;
+    padding: 20px 0;
+  }
+  #forgot-password .forgot-password-container .sub-title {
+    font-size: 1.8rem;
+  }
+  #forgot-password .forgot-password-container .title-form {
+    font-size: 1.2rem;
+  }
+  #forgot-password #forgot-password-form .fa-envelope {
+    font-size: 1.6rem;
+    left: 10px;
+  }
+  #forgot-password #forgot-password-form input {
+    padding-left: 40px;
+  }
+  #forgot-password #forgot-password-form .input-group::after {
+    left: 30px;
+  }
+  #forgot-password .forgot-password-container .forgot-password-btn {
+    height: 45px;
+    font-size: 1.4rem;
+  }
+}
 #header {
   background-color: #f8f9fa;
   padding: 1rem 0;
@@ -303,4 +704,87 @@ select {
   color: #333;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../resources/scss/app.scss%22,%22../../resources/scss/_login.scss%22,%22../../resources/scss/_header.scss%22,%22../../resources/scss/_footer.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;EACI;;;AAGF;EACE;;;AAGF;EACE;EACA;;;AAGF;EACE;;;AAGF;EACE;EACA;EACA;;;AAGF;EACE;;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGF;EACE;;;ACbF;EAfA;EACA;EACA;EAeE;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE;;AAEA;EACE;EACA;;AAGF;EAhCJ;EACA;EACA;EAgCM;EACA;;AAEA;EACE;EACA;;AAMR;EACE;;AAEA;EACE;EACA;EACA;;AAEA;EALF;IAMI;;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA,YA7EM;EA8EN;EACA;;AAIJ;EA1EJ;EACA;EACA;EA0EM;EACA;EACA,OAlFQ;EAmFR;EACA;;AAEA;EACE;EACA;EACA;;AAGF;EACE;EACA;;AAIJ;EACE;EACA;;AAGF;EACE;;AAEA;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA,OA1HC;EA2HD,YA1HO;EA2HP;;AAEA;EACE,cAjIE;;AAmIF;EAEE,OArIA;;AA0IN;EA3HR;EACA;EACA;EACA;EACA;EAyHU;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAIJ;EACE;;AAEA;EACE;EACA;EACA;EACA;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EANF;IAOI;IACA;IACA;;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE,cA1LE;;AA6LJ;EACE;EACA;EACA;;AAIJ;EACE;EACA,OArMM;;AAuMN;EACE;;AAKN;AAAA;EAEE;EACA;EACA;EACA;EACA;;AAGF;EACE;EACA;EACA,OAvNS;EAwNT,YA3NM;;AA6NN;EACE,OA9NI;EA+NJ,YA5NO;;AAgOX;EA1NN;EACA;EACA;EA0NQ;EACA;EACA;EACA,OArOS;EAsOT;;AAEA;EACE;EACA,YA1OO;;AA+Ob;EACE;EACA;EACA;EACA,OApPK;;AAsPL;EACE;EACA,OAzPQ;EA0PR;EACA;;AAEA;EACE,OA/PI;;;ACDhB;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAIA;EACI;EACA;EACA;;AAGI;EACI;EACA;EACA;EACA;;AAEA;EACI;;;AChC5B;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA%22,%22file%22:%22app.css%22%7D */
+#home {
+  background-color: #f5f5f5;
+  padding: 2rem 0;
+}
+#home .home-header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 1rem 0;
+}
+#home .home-header .home-introduce {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+#home .home-header .home-introduce .home-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+#home .home-header .home-introduce .home-breadcrumb {
+  display: flex;
+  align-items: center;
+}
+#home .home-header .home-introduce .home-breadcrumb a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 0.5rem;
+}
+#home .home-header .home-introduce .home-breadcrumb a:hover {
+  text-decoration: underline;
+}
+#home .home-header .home-introduce .home-breadcrumb img {
+  margin-right: 0.5rem;
+}
+#home .home-header .home-introduce .home-breadcrumb p {
+  margin: 0;
+}
+#home .home-body {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+#home .home-body .home-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#home .home-body .home-container .sub-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+#home .home-body .home-container .title-form {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+#home .home-body .home-container .btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+#home .home-body .home-container .btn:hover {
+  background-color: #0056b3;
+}
+#home .home-body .home-container .notification {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+#home .home-body .home-container .notification i {
+  margin-right: 0.5rem;
+  color: #28a745;
+}
+#home .home-body .home-container .notification .notification-text {
+  font-size: 1rem;
+  color: #28a745;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../resources/scss/app.scss%22,%22../../resources/scss/_login.scss%22,%22../../resources/scss/_register.scss%22,%22../../resources/scss/_forgotPassword.scss%22,%22../../resources/scss/_header.scss%22,%22../../resources/scss/_footer.scss%22,%22../../resources/scss/_home.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;EACI;;;AAGF;EACE;;;AAGF;EACE;EACA;;;AAGF;EACE;;;AAGF;EACE;EACA;EACA;;;AAGF;EACE;;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGF;EACE;;;ACbF;EAfA;EACA;EACA;EAeE;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE;;AAEA;EACE;EACA;;AAGF;EAhCJ;EACA;EACA;EAgCM;EACA;;AAEA;EACE;EACA;;AAMR;EACE;;AAEA;EACE;EACA;EACA;;AAEA;EALF;IAMI;;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA,YA7EM;EA8EN;EACA;;AAIJ;EA1EJ;EACA;EACA;EA0EM;EACA;EACA,OAlFQ;EAmFR;EACA;;AAEA;EACE;EACA;EACA;;AAGF;EACE;EACA;;AAIJ;EACE;EACA;;AAGF;EACE;;AAEA;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA,OA1HC;EA2HD,YA1HO;EA2HP;;AAEA;EACE,cAjIE;;AAmIF;EAEE,OArIA;;AA0IN;EA3HR;EACA;EACA;EACA;EACA;EAyHU;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAIJ;EACE;;AAEA;EACE;EACA;EACA;EACA;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EANF;IAOI;IACA;IACA;;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE,cA1LE;;AA6LJ;EACE;EACA;EACA;;AAIJ;EACE;EACA,OArMM;;AAuMN;EACE;;AAKN;AAAA;EAEE;EACA;EACA;EACA;EACA;;AAGF;EACE;EACA;EACA,OAvNS;EAwNT,YA3NM;;AA6NN;EACE,OA9NI;EA+NJ,YA5NO;;AAgOX;EA1NN;EACA;EACA;EA0NQ;EACA;EACA;EACA,OArOS;EAsOT;;AAEA;EACE;EACA,YA1OO;;AA+Ob;EACE;EACA;EACA;EACA,OApPK;;AAsPL;EACE;EACA,OAzPQ;EA0PR;EACA;;AAEA;EACE,OA/PI;;;ACuBd;EAfA;EACA;EACA;EAeE;EACA;EACA;EACA;EACA;EACA;;AAEA;EATF;IAUI;;;AAGF;EACE;;AAEA;EACE;EACA;;AAEA;EAJF;IAKI;;;AAIJ;EAxCJ;EACA;EACA;EAwCM;EACA;;AAEA;EACE;EACA;;AAMR;EACE;;AAEA;EACE;EACA;EACA;;AAEA;EALF;IAMI;;;AAGF;EATF;IAUI;;;AAGF;EAbF;IAcI;IACA;;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA,YA7FM;EA8FN;EACA;;AAIJ;EACE;;AAEA;EACE;EACA;;AAEA;EAJF;IAKI;;;AAGF;EACE;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA,OAvHD;EAwHC,YAtHK;EAuHL;;AAEA;EAZF;IAaI;IACA;;;AAGF;EACE,cAnIA;;AAqIA;EAEE,OAvIF;;AA4IJ;EA9HV;EACA;EACA;EACA;EACA;EA4HY;;AAEA;EAJF;IAKI;IACA;;;AAIJ;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EAXF;IAYI;;;AAIJ;EACE;EACA;EACA;EACA;;AAKF;EACE,cA7KA;;AAgLF;EACE;;AAIJ;EACE;EACA;EACA;EACA;EACA,OA1LE;;AA4LF;EACE;EACA;;AAGF;EACE;;AAKN;EACE;EACA;EACA;EACA;EACA;EACA;EACA,OA7MS;EA8MT,YAlNM;EAmNN;;AAEA;EACE,OAtNI;EAuNJ,YAnNO;;AAsNT;EAhBF;IAiBI;IACA;;;AAKN;EACE;EACA;EACA;EACA,OAnOK;;AAqOL;EACE;EACA,OAxOQ;EAyOR;EACA;;AAEA;EACE,OA9OI;;;ACDhB;EACE;EACA;EACA;EAEA;EACA;EAEA;EACA;EACA;EACA;;;AAGF;EACE;EACA;EAEA;;;AAGF;EACE;EACA;EACA;EACA;EAEA;;;AAGF;EACE;EAEA;;;AAGF;EACE;EACA;EACA;;;AAGF;EACE;EACA;EAEA;EAEA;;;AAGF;EACE;EAEA;EAEA;EACA;EACA;EAEA;EACA;;;AAGF;EACE;EAEA;;;AAGF;EACE;;;AAGF;EACE;EACA;;;AAGF;EACE;;;AAGF;EACE;EAEA;EAEA;EACA;EACA;EACA;;;AAGF;EACE;EACA;EACA;EACA;EAEA;EACA;EAEA;EACA;EAEA;EACA;EAEA;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;EAEA;EACA;EAEA;EACA;EAEA;EACA;EACA;EACA;;;AAGF;EACE;EACA;EAEA;EAEA;EAEA;EAEA;;;AAGF;EACE;;;AAGF;EACE;EACA;;;AAGF;EACE;;;AAGF;EACE;EACA;EACA;EACA;EAEA;EAEA;EAEA;EACA;EAEA;;;AAGF;EACE;EACA;;;AAGF;EACE;IACE;IACA;;EAGF;IACE;;EAGF;IACE;IACA;;EAGF;IACE;;EAGF;IACE;;EAGF;IACE;IACA;;EAGF;IACE;;EAGF;IACE;;EAGF;IACE;IACA;;;AChOJ;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;;AAIA;EACI;EACA;EACA;;AAGI;EACI;EACA;EACA;EACA;;AAEA;EACI;;;AChC5B;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;;;ACbZ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;;AAIR;EACI;;AAGJ;EACI;;AAMhB;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;;AAGJ;EACI;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;;AAIR;EACI;EACA;EACA;;AAEA;EACI;EACA;;AAGJ;EACI;EACA%22,%22file%22:%22app.css%22%7D */
