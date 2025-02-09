@@ -1,5 +1,6 @@
 const beck_answer = require("../models/beck_answer.js");
-const beck_question = require("../models/beck_question");
+const beck_question = require("../models/beck_question.js");
+const beck_score = require("../models/beck_score.js");
 
 class beck_answerController {
 
@@ -31,10 +32,10 @@ class beck_answerController {
         }
     }
 
-    async getOne(req, res) {
+    async get(req, res) {
         try {
             const { id } = req.params;
-            const answer = await beck_answer.findById(id);
+            const answer = await beck_answer.find({ questionId: id });
             if (!answer) {
                 return res.status(404).json({ message: "Answer not found" });
             }
@@ -72,6 +73,29 @@ class beck_answerController {
             }
             await beck_answer.findByIdAndDelete(id);
             return res.status(200).json({ message: "Answer deleted successfully" });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
+    async getQuestions(req, res) {
+        try {
+            const questions = await beck_question.find().sort({ question: "asc" }).limit(21);
+            return res.status(200).json(questions);
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
+    // [POST] /api/beck_score
+    async beck_score(req, res) {
+        try {
+            const user = req.user;
+            const score = req.body.score;
+            
+            await beck_score.create({ userId: user._id, score });
+
+            return res.status(201).json({ message: "Score created successfully" });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }

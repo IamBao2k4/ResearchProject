@@ -8,7 +8,7 @@
   
   body {
     font-size: 1.6rem;
-    font-family: "Poppins";
+    font-family: 'Roboto', sans-serif;
   }
   
   a {
@@ -45,3 +45,5 @@
 @import "header";
 @import "footer";
 @import "home";
+@import "survey";
+@import "practice";

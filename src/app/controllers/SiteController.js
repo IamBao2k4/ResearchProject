@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 const passport = require("passport");
+const jwt = require('jsonwebtoken');
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -96,6 +97,22 @@ const sendOTPVerificationEmail = async (user, res) => {
 
 class SiteController{
 
+    // check if user is authenticated
+    checkAuthenticated(req, res, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        return res.redirect("/login");
+    }
+
+    // check if user is not authenticated
+    checkNotAuthenticated(req, res, next) {
+        if (req.isAuthenticated()) {
+            return res.redirect("/");
+        }
+        return next();
+    }
+
     // [GET] /
     login(req, res) {
         let rememberedEmail = "";
@@ -150,6 +167,8 @@ class SiteController{
                         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 ngày
                     });
                 }
+                const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                res.cookie('token', token, { httpOnly: true });
 
                 return res.status(200).json({
                     success: true,
@@ -390,6 +409,16 @@ class SiteController{
         }
     }
 
+    // [GET] /survey
+    survey(req, res){
+        res.render('survey');
+    }
+
+    // [GET] /practice/:score
+    practice(req, res){
+        const { score } = req.params;
+        res.render('practice', { score });
+    }
 }
 
 module.exports = new SiteController;
