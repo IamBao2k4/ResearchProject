@@ -14,7 +14,10 @@ async function generateAnswers() {
     const questions = await getBECK();
     const survey = document.querySelector(".questions");
 
-    questions.forEach(async (question) => {
+    questions.sort((a, b) => a.question - b.question);
+
+    for (let i = 0; i < questions.length; i++) {
+        const question = questions[i];
         const answerElement = document.createElement("div");
         answerElement.classList.add("answers");
 
@@ -53,7 +56,7 @@ async function generateAnswers() {
         questionElement.appendChild(answerElement);
 
         survey.appendChild(questionElement);
-    });
+    };
 }
 
 const form = document.getElementById("survey-form");

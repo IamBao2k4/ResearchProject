@@ -6,10 +6,16 @@ class AuthController {
 
     //[GET] /auth/status
     authStatus(req, res) {
-        if (req.user) {
-            res.json({ loggedIn: true, user: req.user });
+        const token = req.cookies.token;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.JWT_SECRET);
+                res.status(200).json({ loggedIn: true, userId: decoded.userId });
+            } catch (error) {
+                res.status(401).json({ loggedIn: false });
+            }
         } else {
-            res.json({ loggedIn: false });
+            res.status(401).json({ loggedIn: false });
         }
     }
 }

@@ -1,55 +1,41 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const Users = require("../app/models/Users");
+const jwt = require('jsonwebtoken');
 
 function initializeGG(passport) {
-    passport.use(
-        new GoogleStrategy(
-            {
-                clientID: process.env.GOOGLE_CLIENT_ID,
-                clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-                callbackURL:"/auth/google/callback",
-            },
-            async (accessToken, refreshToken, profile, done) => {
-                try {
-                    const emailUser = await Users.findOne({
-                        email: profile.emails[0].value,
-                    });
-                    if (emailUser && !emailUser.googleId) {
-                        return done(null, false, {
-                            message:
-                                "This email is already used by another account.",
-                        });
-                    }
-                    let user = await Users.findOne({ googleId: profile.id });
-
-                    if (!user) {
-                        user = new Users({
-                            googleId: profile.id,
-                            email: profile.emails[0].value,
-                            verified: true,
-                        });
-
-                        await user.save();
-                    }
-
-                    if (user.isBanned) {
-                        return done(null, false, {
-                            message: "Your account has been locked.",
-                        });
-                    }
-
-                    done(null, user);
-                } catch (error) {
-                    return done(error, null);
-                }
+    passport.use(new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "/auth/google/callback"
+    },
+    async (accessToken, refreshToken, profile, done) => {
+        try {
+            let user = await Users.findOne({ googleId: profile.id });
+            if (!user) {
+                user = await Users.create({
+                    googleId: profile.id,
+                    email: profile.emails[0].value,
+                    name: profile.displayName
+                });
             }
-        )
-    );
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            return done(null, { user, token });
+        } catch (error) {
+            return done(error, false);
+        }
+    }));
 
-    passport.serializeUser((user, done) => done(null, user.id));
+    passport.serializeUser((user, done) => {
+        done(null, user.user._id); // Only serialize the user ID
+    });
+
     passport.deserializeUser(async (id, done) => {
-        const user = await Users.findById(id);
-        return done(null, user);
+        try {
+            const user = await Users.findById(id);
+            done(null, user);
+        } catch (error) {
+            done(error, false);
+        }
     });
 }
 
