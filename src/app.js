@@ -1,4 +1,3 @@
-// filepath: /C:/Users/phanm/OneDrive/Desktop/Personal_Project/ResearchProject/src/app.js
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

@@ -1,30 +1,44 @@
-#home {
-    background-color: #f5f5f5;
-    padding: 2rem 0;
+$primary-color: #007bff; 
+$secondary-color: #ffffff; 
+$text-color: #333;
+$background-color: #f8f9fa;
 
+#home {
+    background-color: $background-color;
+    padding: 10px;
+    
     .home-header {
-        background-color: #007bff;
-        color: #fff;
-        padding: 1rem 0;
+        background: linear-gradient(135deg, $primary-color, adjust-color($primary-color, $lightness: -10%));
+        color: $secondary-color;
+        padding: 20px 20px;
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        border-radius: 8px;
 
         .home-introduce {
+            flex: 1;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
-
+            
             .home-title {
-                font-size: 2rem;
-                margin-bottom: 0.5rem;
+                font-size: 2.5rem;
+                font-weight: bold;
+                padding-left: 1rem; // Adjust padding to 1rem
+                text-align: left;
+                
             }
 
             .home-breadcrumb {
                 display: flex;
+                justify-content: center;
                 align-items: center;
 
                 a {
-                    color: #fff;
+                    color: $secondary-color;
                     text-decoration: none;
-                    margin-right: 0.5rem;
 
                     &:hover {
                         text-decoration: underline;
@@ -40,6 +54,61 @@
                 }
             }
         }
+
+        .home-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            ul {
+                display: flex;
+                list-style: none;
+                gap: 20px;
+
+                li a {
+                    color: $secondary-color;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        color: darken($secondary-color, 10%);
+                    }
+                }
+            }
+
+            .login-btn {
+                padding: 8px 20px;
+                background-color: $secondary-color;
+                color: $primary-color;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: darken($secondary-color, 10%);
+                }
+            }
+
+            .user-status {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #e9f7ef;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                
+                i {
+                    color: #28a745;
+                    font-size: 1.6rem;
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+                }
+            }
+        }
     }
 
     .home-body {
@@ -48,34 +117,37 @@
         padding: 0 1rem;
 
         .home-container {
-            background: #fff;
+            background: $secondary-color;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
 
             .sub-title {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
                 margin-bottom: 1rem;
-                color: #333;
+                color: $text-color;
             }
 
             .title-form {
-                font-size: 1rem;
+                font-size: 1.2rem;
                 margin-bottom: 1rem;
-                color: #555;
+                color: $text-color;
             }
 
             .btn {
                 display: inline-block;
                 padding: 0.75rem 1.5rem;
-                background-color: #007bff;
-                color: #fff;
+                background-color: $primary-color;
+                color: $secondary-color;
                 text-decoration: none;
+                font-size: 1rem;
                 border-radius: 4px;
                 transition: background-color 0.3s;
+                margin: 0.5rem;
 
                 &:hover {
-                    background-color: #0056b3;
+                    background-color: adjust-color($primary-color, $lightness: -10%);
                 }
             }
 
@@ -83,15 +155,146 @@
                 margin-top: 1rem;
                 display: flex;
                 align-items: center;
+                justify-content: center;
+                background-color: #e9f7ef;
+                color: #28a745;
+                padding: 1rem;
+                border-radius: 4px;
 
                 i {
                     margin-right: 0.5rem;
-                    color: #28a745;
                 }
 
                 .notification-text {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+
+    .about-section, .contact-section {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+
+        .about-container, .contact-container {
+            background: $secondary-color;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+
+            .sub-title {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+                color: $text-color;
+            }
+
+            .title-form {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                color: $text-color;
+            }
+
+            .about-img, .contact-img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin: 1rem 0;
+            }
+
+            .team {
+                margin-top: 2rem;
+
+                .team-title {
+                    font-size: 1.8rem;
+                    margin-bottom: 1rem;
+                    color: $text-color;
+                }
+
+                .team-members {
+                    display: flex;
+                    justify-content: space-around;
+                    flex-wrap: wrap;
+
+                    .team-member {
+                        text-align: center;
+                        margin: 1rem;
+                        
+                        .team-member-img {
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-bottom: 0.5rem;
+                        }
+
+                        .team-member-name {
+                            font-size: 1.2rem;
+                            font-weight: bold;
+                            color: $text-color;
+                        }
+
+                        .team-member-position {
+                            font-size: 1rem;
+                            color: $text-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.logout-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    .logout-text {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #28a745;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+
+    &:hover .logout-text {
+        display: block;
+    }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+    #home {
+        .home-header {
+            flex-direction: column;
+
+            .home-introduce {
+                .home-title {
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        .home-body, .about-section, .contact-section {
+            .home-container, .about-container, .contact-container {
+                .sub-title {
+                    font-size: 1.5rem;
+                }
+
+                .title-form {
                     font-size: 1rem;
-                    color: #28a745;
+                }
+
+                .btn {
+                    font-size: 0.9rem;
+                    padding: 0.5rem 1rem;
                 }
             }
         }

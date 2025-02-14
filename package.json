@@ -7,6 +7,7 @@
     "dev": "concurrently \"nodemon ./src/bin/www\" \"npm run watch-css\"",
     "build-css": "sass --style=compressed src/resources/scss/app.scss src/public/stylesheets/app.css",
     "watch-css": "sass --embed-source-map --watch src/resources/scss:src/public/stylesheets/"
+    
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

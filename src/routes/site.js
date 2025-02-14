@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const siteController = require("../app/controllers/SiteController.js");
 
-router.get("/", siteController.home);
+router.get("/", (req, res) => {
+    res.render("home", { user: req.user });
+});
 
 router.get("/login", 
     siteController.checkNotAuthenticated,

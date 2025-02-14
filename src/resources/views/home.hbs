@@ -1,27 +1,75 @@
 <main id="home">
     <div class="home-header">
         <div class="home-introduce">
-            <h1 class="home-title">Home</h1>
-            <div class="home-breadcrumb">
-                <a href="/">Home</a>
-                <img src="/img/arrow_right.svg" alt="" />
-                <p>Home</p>
-            </div>
+            <h1 class="home-title">Chăm sóc sức khoẻ</h1>
+           
         </div>
+        <nav class="home-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            {{#if user}}
+                <div class="user-status" id="user-status">
+                    <i class="fa-solid fa-check"></i>
+                    
+                </div>
+            {{else}}
+                <a href="/login" class="btn login-btn">Đăng nhập</a>
+            {{/if}}
+        </nav>
     </div>
     <div class="home-body">
         <div class="home-container">
-            <h2 class="sub-title">Home</h2>
-            <p class="title-form">Welcome to the Research website!</p>
-            <p class="title-form">This is a simple website to demonstrate the use of Handlebars.</p>
-            <p class="title-form">You can navigate to the Login page by clicking the button below:</p>
-            <a href="/login" class="btn">Login</a>
-            <a href="/survey" class="btn">Survey</a>
-
-            <div class="notification">
-                <i class="fa-solid fa-check"></i>
-                <p class="notification-text"></p>
+            <h2 class="sub-title">Chào mừng đến với trang web chăm sóc sức khoẻ!</h2>
+            <p class="title-form">Đây là một trang web đơn giản để giới thiệu về chăm sóc sức khoẻ.</p>
+            <p class="title-form">Bạn có thể điều hướng đến trang Khảo sát bằng cách nhấn vào nút bên dưới:</p>
+            <a href="/survey" class="btn">Khảo sát</a>
+    </div>
+    </div>
+    <div id="about" class="about-section">
+        <div class="about-container">
+     
+            <h2 class="sub-title">Giới thiệu</h2>
+            <p class="title-form">Nhiệm vụ của chúng tôi là cung cấp các phương pháp và công cụ để giúp mọi người cải thiện sức khoẻ tâm lý của mình.</p>
+            <div class="team">
+                <h3 class="team-title">Thành viên nhóm</h3>
+                <div class="team-members">
+                    <div class="team-member">
+                        <img src="/img/dang.svg" alt="Member 1" class="team-member-img">
+                        <p class="team-member-name">Lê Hải Đăng</p>
+                        <p class="team-member-position">Developer</p>
+                    </div>
+                    <div class="team-member">
+                   <img src="/img/bao.svg" alt="Member 2" class="team-member-img">
+                        <p class="team-member-name">Trần Minh Gia Bảo</p>
+                        <p class="team-member-position">Developer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/img/arrow_right.svg" alt="Member 3" class="team-member-img">
+                        <p class="team-member-name">Trâm</p>
+                        <p class="team-member-position">Chuyên gia tâm lý</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/img/arrow_right.svg" alt="Member 4" class="team-member-img">
+                        <p class="team-member-name">Thịnh</p>
+                        <p class="team-member-position">Chuyên gia tâm lý</p>
+                    </div>
+                </div>
             </div>
+            
+            
+            
+                
+
+        </div>
+    
+    <div id="contact" class="contact-section">
+        <div class="contact-container">
+            <h2 class="sub-title">Contact Us</h2>
+            <p class="title-form">Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua email: <a href="mailto:ahihi@healthcare.com">info@healthcare.com</a></p>
+       
         </div>
     </div>
 </main>
