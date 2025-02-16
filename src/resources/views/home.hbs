@@ -1,75 +1,171 @@
+<div class="header-backdrop"></div>
 <main id="home">
     <div class="home-header">
         <div class="home-introduce">
             <h1 class="home-title">Chăm sóc sức khoẻ</h1>
-           
         </div>
         <nav class="home-nav">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="#about">Dịch vụ</a></li>
+                <li><a href="#contact">Liên hệ </a></li>
             </ul>
             {{#if user}}
                 <div class="user-status" id="user-status">
                     <i class="fa-solid fa-check"></i>
-                    
                 </div>
             {{else}}
                 <a href="/login" class="btn login-btn">Đăng nhập</a>
             {{/if}}
         </nav>
     </div>
-    <div class="home-body">
-        <div class="home-container">
-            <h2 class="sub-title">Chào mừng đến với trang web chăm sóc sức khoẻ!</h2>
-            <p class="title-form">Đây là một trang web đơn giản để giới thiệu về chăm sóc sức khoẻ.</p>
-            <p class="title-form">Bạn có thể điều hướng đến trang Khảo sát bằng cách nhấn vào nút bên dưới:</p>
-            <a href="/survey" class="btn">Khảo sát</a>
+
+    <div class="hero-section">
+        <h1 class="hero-title">Chăm sóc sức khỏe tâm lý</h1>
+        <p class="hero-description">
+            Chúng tôi cung cấp các giải pháp và công cụ chuyên nghiệp để hỗ trợ sức khỏe tinh thần của bạn. 
+            Với đội ngũ chuyên gia tâm lý giàu kinh nghiệm, chúng tôi cam kết đồng hành cùng bạn trên hành trình 
+            phát triển bản thân và cải thiện sức khỏe tinh thần. Thông qua các phương pháp đánh giá khoa học 
+            và liệu pháp tâm lý hiện đại, chúng tôi sẽ giúp bạn xây dựng một cuộc sống cân bằng và hạnh phúc hơn.
+        </p>
+        <a href="/survey" class="explore-btn">Khảo sát</a>
     </div>
+
+    <div class="showcase-section">
+        <div class="main-showcase">
+            <img src="/img/img1.svg" alt="Modern Architecture" class="showcase-img">
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-item">
+                <img src="/img/img2.svg" alt="Geometric Patterns" class="grid-img">
+            </div>
+            <div class="showcase-item">
+                <img src="/img/img3.svg" alt="Spiral Structure" class="grid-img">
+            </div>
+            <div class="showcase-item">
+                <img src="/img/img4.svg" alt="Wave Patterns" class="grid-img">
+            </div>
+        </div>
     </div>
-    <div id="about" class="about-section">
-        <div class="about-container">
-     
-            <h2 class="sub-title">Giới thiệu</h2>
-            <p class="title-form">Nhiệm vụ của chúng tôi là cung cấp các phương pháp và công cụ để giúp mọi người cải thiện sức khoẻ tâm lý của mình.</p>
-            <div class="team">
-                <h3 class="team-title">Thành viên nhóm</h3>
-                <div class="team-members">
-                    <div class="team-member">
-                        <img src="/img/dang.svg" alt="Member 1" class="team-member-img">
-                        <p class="team-member-name">Lê Hải Đăng</p>
-                        <p class="team-member-position">Developer</p>
+
+    <div id="about" class="home-body">
+        <div class="services-section">
+            <h2 class="section-title">Dịch vụ của chúng tôi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <div class="team-member">
-                   <img src="/img/bao.svg" alt="Member 2" class="team-member-img">
-                        <p class="team-member-name">Trần Minh Gia Bảo</p>
-                        <p class="team-member-position">Developer</p>
+                    <h3>Đánh giá tâm lý</h3>
+                    <p>Sử dụng các bài test tâm lý chuẩn hóa để đánh giá tình trạng sức khỏe tinh thần của bạn một cách chính xác và khoa học.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
                     </div>
-                    <div class="team-member">
-                        <img src="/img/arrow_right.svg" alt="Member 3" class="team-member-img">
-                        <p class="team-member-name">Trâm</p>
-                        <p class="team-member-position">Chuyên gia tâm lý</p>
+                    <h3>Tư vấn chuyên sâu</h3>
+                    <p>Đội ngũ chuyên gia tâm lý giàu kinh nghiệm sẵn sàng lắng nghe và tư vấn giúp bạn vượt qua khó khăn.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="team-member">
-                        <img src="/img/arrow_right.svg" alt="Member 4" class="team-member-img">
-                        <p class="team-member-name">Thịnh</p>
-                        <p class="team-member-position">Chuyên gia tâm lý</p>
-                    </div>
+                    <h3>Liệu pháp nhóm</h3>
+                    <p>Tham gia các nhóm hỗ trợ và chia sẻ cùng những người có trải nghiệm tương tự để học hỏi và phát triển.</p>
                 </div>
             </div>
-            
-            
-            
-                
-
         </div>
-    
-    <div id="contact" class="contact-section">
-        <div class="contact-container">
-            <h2 class="sub-title">Contact Us</h2>
-            <p class="title-form">Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua email: <a href="mailto:ahihi@healthcare.com">info@healthcare.com</a></p>
-       
+
+        <div class="why-choose-section">
+            <h2 class="section-title">Tại sao chọn chúng tôi?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="benefit-number">01</span>
+                    <h3>Chuyên môn cao</h3>
+                    <p>Đội ngũ chuyên gia được đào tạo bài bản và có nhiều năm kinh nghiệm trong lĩnh vực tâm lý.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-number">02</span>
+                    <h3>Bảo mật thông tin</h3>
+                    <p>Cam kết bảo mật tuyệt đối thông tin cá nhân và nội dung tư vấn của khách hàng.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-number">03</span>
+                    <h3>Linh hoạt thời gian</h3>
+                    <p>Dịch vụ tư vấn trực tuyến 24/7, giúp bạn dễ dàng tiếp cận sự hỗ trợ bất cứ khi nào cần.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-number">04</span>
+                    <h3>Giá cả hợp lý</h3>
+                    <p>Chi phí dịch vụ phù hợp với nhiều đối tượng, đảm bảo mọi người đều có thể tiếp cận dịch vụ chăm sóc sức khỏe tâm lý.</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div id="contact" class="about-section">
+        <div class="team-container">
+            <h3 class="team-title">Thành viên nhóm</h3>
+            <div class="team-members">
+                <div class="team-member">
+                    <a href="https://www.facebook.com/hai.ang.484196/" target="_blank" class="member-image-link">
+                        <img src="/img/dang.svg" alt="Lê Hải Đăng" class="team-member-img">
+                    </a>
+                    <h2 class="team-member-name">Hải Đăng</h2>
+                    <h3 class="team-member-position">Developer</h3>
+                </div>
+                <div class="team-member">
+                    <a href="https://facebook.com/link-to-bao" target="_blank" class="member-image-link">
+                        <img src="/img/bao.svg" alt="Trần Minh Gia Bảo" class="team-member-img">
+                    </a>
+                    <h2 class="team-member-name">Gia Bảo</h2>
+                    <h3 class="team-member-position">Developer</h3>
+                </div>
+                <div class="team-member">
+                    <a href="https://facebook.com/link-to-tram" target="_blank" class="member-image-link">
+                        <img src="/img/tram.svg" alt="Trâm" class="team-member-img">
+                    </a>
+                    <h2 class="team-member-name">TAS</h2>
+                    <h3 class="team-member-position">Social worker</h3>
+                </div>
+                <div class="team-member">
+                    <a href="https://facebook.com/link-to-thinh" target="_blank" class="member-image-link">
+                        <img src="/img/thinh.svg" alt="Thịnh" class="team-member-img">
+                    </a>
+                    <h2 class="team-member-name">Thịnh</h2>
+                    <h3 class="team-member-position">Social worker</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-container">
+            <h3 class="team-title">Liên hệ</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+
+                    <i class="fas fa-phone"></i>
+                    <span>Hotline: 1900 1234</span>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>support@healthcare.vn</span>
+                </div>
+              
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Số 123 Nguyễn Văn Linh, Quận 7, TP. Hồ Chí Minh</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Thứ 2 - Thứ 6: 8:00 - 17:00</span>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    
+   
 </main>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
