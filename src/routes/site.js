@@ -3,7 +3,10 @@ const router = express.Router();
 const siteController = require("../app/controllers/SiteController.js");
 
 router.get("/", (req, res) => {
-    res.render("home", { user: req.user });
+    res.render("home", { 
+        user: req.user,
+        avatar: req.user?.avatar || '/img/anonymous-avatar.png'
+    });
 });
 
 router.get("/login", 
