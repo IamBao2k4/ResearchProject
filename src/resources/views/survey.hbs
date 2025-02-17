@@ -1,23 +1,49 @@
 <main id="survey">
-    <div class="survey-header">
-        <div class="survey-introduce">
-            <h1 class="survey-title">Survey</h1>
-            <div class="survey-breadcrumb">
-                <a href="/">Home</a>
-                <img src="/img/arrow_right.svg" alt="" />
-                <p>Survey</p>
-            </div>
-        </div>
-    </div>
     <div class="survey-body">
         <div class="survey-container">
-            <h2 class="sub-title">Survey</h2>
-            <p class="title-form">Please fill out the survey below:</p>
-            <form id="survey-form" action="/survey" method="POST">
-                <div class="input-group questions">
+            <div class="survey-intro">
+                <h2 class="sub-title">Trắc nghiệm đánh giá mức độ trầm cảm Beck</h2>
+                <p class="description">
+                    Bài trắc nghiệm này giúp bạn đánh giá mức độ trầm cảm của bản thân. 
+                    Hãy đọc kỹ và chọn phương án phù hợp nhất với tình trạng của bạn trong 2 tuần gần đây.
+                </p>
+            </div>
 
+            <div class="progress-bar">
+                <div class="progress-text">Đã trả lời <span id="current-question">1</span>/21</div>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 4.76%"></div>
                 </div>
-                <button type="submit" class="btn-submit">Submit</button>
+            </div>
+
+            <form id="survey-form" action="/survey" method="POST">
+                <div class="questions">
+                    {{#each questions}}
+                    <div class="question-card">
+                        <h3 class="question-number">Câu {{this.number}}</h3>
+                        <p class="question-text">{{this.text}}</p>
+                        <div class="answers">
+                            {{#each this.answers}}
+                            <div class="answer-option">
+                                <input type="radio" 
+                                       id="q{{../number}}a{{@index}}" 
+                                       name="question{{../number}}" 
+                                       value="{{@index}}"
+                                       required>
+                                <label for="q{{../number}}a{{@index}}">{{this}}</label>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <span>Gửi câu trả lời</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
