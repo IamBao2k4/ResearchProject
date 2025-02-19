@@ -22,4 +22,30 @@ document.querySelector('.logout-button').addEventListener('click', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const surveyLoginBtn = document.querySelector('#survey-login-btn');
+    
+    if (surveyLoginBtn) {
+        surveyLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = '/login';
+        });
+    }
+    
+    // Tìm nút bằng class video-btn
+    const continueVideoBtn = document.querySelector('.video-btn');
+    
+    if (continueVideoBtn) {
+        // Kiểm tra trạng thái từ localStorage
+        if (localStorage.getItem('hideVideoButton') === 'true') {
+            // Tìm phần tử cha gần nhất và ẩn nó
+            const parentElement = continueVideoBtn.closest('#player');
+            if (parentElement) {
+                parentElement.style.display = 'none';
+            }
+            localStorage.removeItem('hideVideoButton');
+        }
+    }
+});
+
 // ...existing code...

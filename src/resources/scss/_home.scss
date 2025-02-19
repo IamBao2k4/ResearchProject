@@ -199,6 +199,13 @@ $max-width: 1200px;
             margin-right: auto;
         }
 
+        .survey-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
         .explore-btn {
             display: inline-block;
             padding: 20px 60px;
@@ -1085,5 +1092,66 @@ $max-width: 1200px;
         height: 35px;
         border-radius: 50%;
         overflow: hidden;
+    }
+}
+
+.survey-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.continue-btn {
+    display: inline-block;
+    padding: 20px 60px;
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
+    text-decoration: none;
+    border-radius: 40px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+
+    &:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.5);
+        background: linear-gradient(135deg, #1e7e34, #145523);
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(45deg);
+        animation: shine 3s infinite;
+    }
+}
+
+@media (max-width: 768px) {
+    .survey-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .continue-btn,
+    .explore-btn {
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        width: 100%;
+        max-width: 300px;
     }
 }

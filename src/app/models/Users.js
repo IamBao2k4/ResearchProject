@@ -20,6 +20,7 @@ const Users = new Schema(
         },
         role: { type: String, default: "Customer" },
         isBanned: { type: Boolean, default: false },
+        lastSurveyScore: Number
     },
     {
         timestamps: true,

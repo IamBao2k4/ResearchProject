@@ -5,7 +5,8 @@ const siteController = require("../app/controllers/SiteController.js");
 router.get("/", (req, res) => {
     res.render("home", { 
         user: req.user,
-        avatar: req.user?.avatar || '/img/anonymous-avatar.png'
+        avatar: req.user?.avatar || '/img/anonymous-avatar.png',
+        lastSurveyScore: req.user?.lastSurveyScore
     });
 });
 

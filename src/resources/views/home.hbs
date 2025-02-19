@@ -28,7 +28,18 @@
             phát triển bản thân và cải thiện sức khỏe tinh thần. Thông qua các phương pháp đánh giá khoa học 
             và liệu pháp tâm lý hiện đại, chúng tôi sẽ giúp bạn xây dựng một cuộc sống cân bằng và hạnh phúc hơn.
         </p>
-        <a href="/survey" class="explore-btn">Khảo sát</a>
+        {{#if user}}
+            {{#if lastSurveyScore}}
+                <div class="survey-buttons">
+                    <a href="/survey" class="explore-btn">Khảo sát</a>
+                    <a href="/practice/{{lastSurveyScore}}" class="continue-btn">Tiếp tục xem video</a>
+                </div>
+            {{else}}
+                <a href="/survey" class="explore-btn">Khảo sát</a>
+            {{/if}}
+        {{else}}
+            <a href="/login" class="explore-btn" id="survey-login-btn">Khảo sát</a>
+        {{/if}}
     </div>
 
     <div class="showcase-section">

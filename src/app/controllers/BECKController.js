@@ -1,6 +1,7 @@
 const beck_answer = require("../models/beck_answer.js");
 const beck_question = require("../models/beck_question.js");
 const beck_score = require("../models/beck_score.js");
+const Users = require("../models/Users.js");
 
 class beck_answerController {
 
@@ -93,7 +94,11 @@ class beck_answerController {
             const user = req.user;
             const score = req.body.score;
             
+            // Lưu điểm vào beck_score
             await beck_score.create({ userId: user._id, score });
+            
+            // Cập nhật lastSurveyScore cho user
+            await Users.findByIdAndUpdate(user._id, { lastSurveyScore: score });
 
             return res.status(201).json({ message: "Score created successfully" });
         } catch (error) {
