@@ -14,9 +14,6 @@ async function generateAnswers() {
     const questions = await getBECK();
     const survey = document.querySelector(".questions");
 
-    // Log để kiểm tra dữ liệu
-    console.log("Questions from API:", questions);
-
     questions.sort((a, b) => a.question - b.question);
 
     for (let i = 0; i < questions.length; i++) {
@@ -41,7 +38,8 @@ async function generateAnswers() {
         const answers = await getAnswerByQuestionId(question._id);
         console.log("Answers for question", i + 1, ":", answers);
 
-        answers.forEach((answer, index) => {
+        for (let index = 0; index < answers.length; index++) {
+            const answer = answers[index];
             const answerContainer = document.createElement("div");
             answerContainer.classList.add("answer-option");
 
@@ -66,7 +64,7 @@ async function generateAnswers() {
 
             // Thêm event listener cho radio button
             answerInput.addEventListener('change', updateProgress);
-        });
+        };
 
         questionElement.appendChild(questionNumber);
         questionElement.appendChild(questionText);
@@ -110,19 +108,24 @@ form.addEventListener("submit", async (e) => {
             if(score < 14) {
                 showModal(
                     "Kết quả đánh giá",
-                    "Bạn không có biểu hiện trầm cảm.",
-                    null
+                    `Điểm số của bạn là ${ score } (bé hơn 14 điểm) vì vậy bạn không có biểu hiện trầm cảm.`,
+                    () => {
+                        window.location.replace("/");
+                    }
                 );
             } else if(score > 30) {
                 showModal(
                     "Kết quả đánh giá",
-                    "Bạn có biểu hiện trầm cảm nặng, hãy liên hệ với bác sĩ để được tư vấn. Bạn có muốn đi tới trang hỗ trợ không?",
-                    () => window.open("https://bookingcare.vn/co-so-y-te/vien-tu-van-tam-ly-sunnycare-p317", "_blank")
+                    `Điểm số của bạn là ${ score } (lớn hơn 30 điểm) vì vậy bạn có biểu hiện trầm cảm nặng, hãy liên hệ với bác sĩ để được tư vấn. Bạn có muốn đi tới trang hỗ trợ không?`,
+                    () => {
+                        window.open("https://bookingcare.vn/co-so-y-te/vien-tu-van-tam-ly-sunnycare-p317", "_blank");
+                        window.location.replace("/");
+                    }
                 );
             } else {
                 showModal(
                     "Kết quả đánh giá",
-                    `Bạn có biểu hiện trầm cảm ${score >= 14 && score <= 19 ? "nhẹ" : "trung bình"}. Bạn có muốn thực hành phương pháp giảm căng thẳng không?`,
+                    `Điểm số của bạn là ${ score } (${score >= 14 && score <= 19 ? "nằm trong khoảng từ 14 đến 19 điểm" : "năm trong khoảng từ 20 đến 29 điểm"}) vì vậy bạn có biểu hiện trầm cảm ${score >= 14 && score <= 19 ? "nhẹ" : "trung bình"}. Bạn có muốn thực hành phương pháp giảm căng thẳng không?`,
                     () => {
                         fetch(`/practice/${score}`, {
                             method: "GET",
@@ -200,6 +203,7 @@ function showModal(title, message, onConfirm) {
     const closeModal = () => {
         modal.style.display = 'none';
         modal.remove();
+        window.location.replace("/");
     };
 
     if (onConfirm) {

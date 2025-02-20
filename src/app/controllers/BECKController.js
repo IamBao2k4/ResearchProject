@@ -36,7 +36,7 @@ class beck_answerController {
     async get(req, res) {
         try {
             const { id } = req.params;
-            const answer = await beck_answer.find({ questionId: id });
+            const answer = await beck_answer.find({ questionId: id }).sort({ _id: "asc" });
             if (!answer) {
                 return res.status(404).json({ message: "Answer not found" });
             }
