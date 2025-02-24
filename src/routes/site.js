@@ -34,8 +34,6 @@ router.get("/survey",
     siteController.checkAuthenticated,
     siteController.survey);
 
-router.get("/practice/:score", 
-    siteController.checkAuthenticated,
-    siteController.practice);
+router.get("/practice/:score", siteController.practice);
 
 module.exports = router;

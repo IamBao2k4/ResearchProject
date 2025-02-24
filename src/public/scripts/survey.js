@@ -125,16 +125,9 @@ form.addEventListener("submit", async (e) => {
             } else {
                 showModal(
                     "Kết quả đánh giá",
-                    `Điểm số của bạn là ${ score } (${score >= 14 && score <= 19 ? "nằm trong khoảng từ 14 đến 19 điểm" : "năm trong khoảng từ 20 đến 29 điểm"}) vì vậy bạn có biểu hiện trầm cảm ${score >= 14 && score <= 19 ? "nhẹ" : "trung bình"}. Bạn có muốn thực hành phương pháp giảm căng thẳng không?`,
+                    `Điểm số của bạn là ${score} (${score >= 14 && score <= 19 ? "nằm trong khoảng từ 14 đến 19 điểm" : "nằm trong khoảng từ 20 đến 29 điểm"}) vì vậy bạn có biểu hiện trầm cảm ${score >= 14 && score <= 19 ? "nhẹ" : "trung bình"}. Bạn có muốn thực hành phương pháp giảm căng thẳng không?`,
                     () => {
-                        fetch(`/practice/${score}`, {
-                            method: "GET",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        }).then(() => {
-                            window.location.replace(`/practice/${score}`);
-                        });
+                        window.location.href = `/practice/${score}`;
                     }
                 );
             }
@@ -203,16 +196,21 @@ function showModal(title, message, onConfirm) {
     const closeModal = () => {
         modal.style.display = 'none';
         modal.remove();
-        window.location.replace("/");
     };
 
     if (onConfirm) {
-        modal.querySelector('.modal-btn-cancel').addEventListener('click', closeModal);
+        modal.querySelector('.modal-btn-cancel').addEventListener('click', () => {
+            closeModal();
+            window.location.href = '/';
+        });
         modal.querySelector('.modal-btn-confirm').addEventListener('click', () => {
             closeModal();
             onConfirm();
         });
     } else {
-        modal.querySelector('.modal-btn-confirm').addEventListener('click', closeModal);
+        modal.querySelector('.modal-btn-confirm').addEventListener('click', () => {
+            closeModal();
+            window.location.href = '/';
+        });
     }
 }
