@@ -13,6 +13,9 @@ const route = require("./routes");
 
 var app = express();
 
+// Register Handlebars helpers
+require('./helpers/handlebars');
+
 // Connect to MongoDB
 db.connect();
 

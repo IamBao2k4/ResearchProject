@@ -1,0 +1,35 @@
+<main id="header">
+    <div class="home-header">
+        <div class="home-introduce">
+            <h1 class="home-title">Chạm đến bạn</h1>
+        </div>
+        <nav class="home-nav">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="#about">Dịch vụ</a></li>
+                <li><a href="#contact">Liên hệ </a></li>
+            </ul>
+            {{#if user}}
+                <div class="user-status" id="user-status">
+                    <button class="profile-btn" onclick="showOptions()">
+                        {{#if avatar}}
+                            <img src="{{avatar}}" alt="User avatar" class="user-avatar">
+                        {{else}}
+                            <img src="/img/avatar.svg" alt="default avatar" class="user-avatar">
+                        {{/if}}
+                    </button>
+                    <div class="profile-options" id="profile-options" style="display: none;">
+                        <a href="/profile">Hồ sơ</a>
+                        <form action="/logout?_method=DELETE" method="POST">
+                            <button type="submit" class="logout-btn"><a>Đăng xuất</a></button>
+                        </form>
+                    </div>
+                </div>
+            {{else}}
+                <a href="/login" class="btn login-btn">Đăng nhập</a>
+            {{/if}}
+        </nav>
+    </div>
+</main>
+
+<script src="/scripts/header.js"></script>

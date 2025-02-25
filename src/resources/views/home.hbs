@@ -1,27 +1,7 @@
 <div class="header-backdrop"></div>
 <main id="home">
-    <div class="home-header">
-        <div class="home-introduce">
-            <h1 class="home-title">Chăm sóc sức khoẻ</h1>
-        </div>
-        <nav class="home-nav">
-            <ul>
-                <li><a href="/">Trang chủ</a></li>
-                <li><a href="#about">Dịch vụ</a></li>
-                <li><a href="#contact">Liên hệ </a></li>
-            </ul>
-            {{#if user}}
-                <div class="user-status" id="user-status">
-                    <img src="/img/avatar.svg" alt="User avatar" class="user-avatar">
-                </div>
-            {{else}}
-                <a href="/login" class="btn login-btn">Đăng nhập</a>
-            {{/if}}
-        </nav>
-    </div>
-
     <div class="hero-section">
-        <h1 class="hero-title">Chăm sóc sức khỏe tâm lý</h1>
+        <h1 class="hero-title">Hỗ trợ Sức khỏe Tinh thần</h1>
         <p class="hero-description">
             Chúng tôi cung cấp các giải pháp và công cụ chuyên nghiệp để hỗ trợ sức khỏe tinh thần của bạn. 
             Với đội ngũ chuyên gia tâm lý giàu kinh nghiệm, chúng tôi cam kết đồng hành cùng bạn trên hành trình 
@@ -29,14 +9,14 @@
             và liệu pháp tâm lý hiện đại, chúng tôi sẽ giúp bạn xây dựng một cuộc sống cân bằng và hạnh phúc hơn.
         </p>
         {{#if user}}
-            {{#if lastSurveyScore}}
+            {{#isToday surveyDate}}
                 <div class="survey-buttons">
                     <a href="/survey" class="explore-btn">Khảo sát</a>
                     <a href="/practice/{{lastSurveyScore}}" class="continue-btn">Tiếp tục xem video</a>
                 </div>
             {{else}}
                 <a href="/survey" class="explore-btn">Khảo sát</a>
-            {{/if}}
+            {{/isToday}}
         {{else}}
             <a href="/login" class="explore-btn" id="survey-login-btn">Khảo sát</a>
         {{/if}}

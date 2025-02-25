@@ -81,7 +81,7 @@ class beck_answerController {
 
     async getQuestions(req, res) {
         try {
-            const questions = await beck_question.find().sort({ question: "asc" }).limit(21);
+            const questions = await beck_question.find().sort({ question: "asc" }).limit(1);
             return res.status(200).json(questions);
         } catch (error) {
             return res.status(500).json({ message: error.message });
@@ -97,8 +97,9 @@ class beck_answerController {
             // Lưu điểm vào beck_score
             await beck_score.create({ userId: user._id, score });
             
-            // Cập nhật lastSurveyScore cho user
+            // Cập nhật lastSurveyScore và surveyDate cho user 
             await Users.findByIdAndUpdate(user._id, { lastSurveyScore: score });
+            await Users.findByIdAndUpdate(user._id, { surveyDate: new Date() });
 
             return res.status(201).json({ message: "Score created successfully" });
         } catch (error) {

@@ -7,7 +7,6 @@
     "dev": "concurrently \"nodemon ./src/bin/www\" \"npm run watch-css\"",
     "build-css": "sass --style=compressed src/resources/scss/app.scss src/public/stylesheets/app.css",
     "watch-css": "sass --embed-source-map --watch src/resources/scss:src/public/stylesheets/"
-    
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -17,6 +16,7 @@
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
     "express-session": "^1.18.1",
+    "handlebars": "^4.7.8",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "jade": "^0.29.0",

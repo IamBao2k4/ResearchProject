@@ -228,6 +228,16 @@ class SiteController{
         }
     }
 
+    // [POST] /logout
+    logout(req, res, next) {
+        req.logout(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.redirect("/login");
+        });
+    }
+
     // [GET] /verify/:userId/:uniqueString
     verifyEmail(req, res) {
         const { userId, uniqueString } = req.params;
@@ -411,13 +421,20 @@ class SiteController{
 
     // [GET] /survey
     survey(req, res){
-        res.render('survey');
+        res.render('survey', {
+            user: req.user,
+            avatar: req.user?.avatar || 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg',
+        });
     }
 
     // [GET] /practice/:score
     practice(req, res){
         const { score } = req.params;
-        res.render('practice', { score });
+        console.log("user", req.user);
+        res.render('practice', { score,
+            user: req.user,
+            avatar: req.user?.avatar || 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg',
+         });
     }
 }
 

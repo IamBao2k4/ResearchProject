@@ -5,8 +5,9 @@ const siteController = require("../app/controllers/SiteController.js");
 router.get("/", (req, res) => {
     res.render("home", { 
         user: req.user,
-        avatar: req.user?.avatar || '/img/anonymous-avatar.png',
-        lastSurveyScore: req.user?.lastSurveyScore
+        avatar: req.user?.avatar || 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg',
+        lastSurveyScore: req.user?.lastSurveyScore,
+        surveyDate: req.user?.surveyDate
     });
 });
 
@@ -21,6 +22,8 @@ router.get("/register",
     siteController.register);
 
 router.post("/register", siteController.registerPost);
+
+router.post("/logout", siteController.logout);
 
 router.get("/verify/:userId/:uniqueString", siteController.verifyEmail);
 
