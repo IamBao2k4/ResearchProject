@@ -1,4 +1,3 @@
-const { render } = require("../../app");
 const Users = require("../models/Users");
 const UsersVerification = require("../models/UsersVerification");
 
@@ -8,6 +7,9 @@ const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 const passport = require("passport");
 const jwt = require('jsonwebtoken');
+const { default: mongoose } = require("mongoose");
+
+const defaultAvatar = 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg';
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -423,7 +425,7 @@ class SiteController{
     survey(req, res){
         res.render('survey', {
             user: req.user,
-            avatar: req.user?.avatar || 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg',
+            avatar: req.user?.avatar || defaultAvatar,
         });
     }
 
@@ -433,7 +435,7 @@ class SiteController{
         console.log("user", req.user);
         res.render('practice', { score,
             user: req.user,
-            avatar: req.user?.avatar || 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg',
+            avatar: req.user?.avatar || defaultAvatar,
          });
     }
 }

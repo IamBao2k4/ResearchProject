@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const content = title.nextElementSibling;
             const step = title.closest('.practice_step');
             
-            // Nếu là bước 3, mở video modal
-            if (step.classList.contains('step_3')) {
+            // Nếu là bước 2, mở video modal
+            if (step.classList.contains('step_2')) {
                 showVideoModal('inpok4MKVLM');
                 return;
             }
