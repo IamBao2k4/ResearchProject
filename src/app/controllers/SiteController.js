@@ -9,7 +9,8 @@ const passport = require("passport");
 const jwt = require('jsonwebtoken');
 const { default: mongoose } = require("mongoose");
 
-const defaultAvatar = 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg';
+const { mutipleMongooseToObject } = require("../../util/mongoose");
+const { mongooseToObject } = require("../../util/mongoose");
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -181,8 +182,16 @@ class SiteController{
     }
 
     // [GET] /home
-    home(req, res){
-        res.render('home');
+     async home(req, res){
+        let user;
+        if(req.user){
+           user = await Users.findById(req.user.id); 
+        }
+        res.render('home', 
+            {
+                user: mongooseToObject(user),
+            }
+        );
     }
 
     // [GET] /register
@@ -422,20 +431,19 @@ class SiteController{
     }
 
     // [GET] /survey
-    survey(req, res){
+    async survey(req, res){
+        const user = await Users.findOne({ _id: req.user._id });
         res.render('survey', {
-            user: req.user,
-            avatar: req.user?.avatar || defaultAvatar,
+            user: mongooseToObject(user),
         });
     }
 
     // [GET] /practice/:score
-    practice(req, res){
+    async practice(req, res){
         const { score } = req.params;
-        console.log("user", req.user);
+        const user = await Users.findById(req.user.id);
         res.render('practice', { score,
-            user: req.user,
-            avatar: req.user?.avatar || defaultAvatar,
+            user: mongooseToObject(user),
          });
     }
 }

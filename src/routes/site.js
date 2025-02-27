@@ -2,14 +2,7 @@ const express = require("express");
 const router = express.Router();
 const siteController = require("../app/controllers/SiteController.js");
 
-router.get("/", (req, res) => {
-    res.render("home", { 
-        user: req.user,
-        avatar: req.user?.avatar || 'https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg',
-        lastSurveyScore: req.user?.lastSurveyScore,
-        surveyDate: req.user?.surveyDate
-    });
-});
+router.get("/", siteController.home);
 
 router.get("/login", 
     siteController.checkNotAuthenticated,

@@ -12,8 +12,8 @@
             {{#if user}}
                 <div class="user-status" id="user-status">
                     <button class="profile-btn" onclick="showOptions()">
-                        {{#if avatar}}
-                            <img src="{{avatar}}" alt="User avatar" class="user-avatar">
+                        {{#if user.avatar}}
+                            <img src="{{user.avatar}}" alt="User avatar" class="user-avatar">
                         {{else}}
                             <img src="/img/avatar.svg" alt="default avatar" class="user-avatar">
                         {{/if}}
