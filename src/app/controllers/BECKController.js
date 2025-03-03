@@ -26,7 +26,6 @@ class beck_answerController {
     async getAll(req, res) {
         try {
             const answers = await beck_answer.find();
-            console.log("answers", answers);
             return res.status(200).json(answers);
         } catch (error) {
             return res.status(500).json({ message: error.message });

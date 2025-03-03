@@ -1,4 +1,5 @@
-console.log('Script loaded');
+const checkinSaveBtn = document.querySelector(".checkin-save-btn");
+const checkoutSaveBtn = document.querySelector(".checkout-save-btn");
 
 document.addEventListener("DOMContentLoaded", () => {
     const stepTitles = document.querySelectorAll(".practice_step_title");
@@ -34,7 +35,87 @@ document.addEventListener("DOMContentLoaded", () => {
     videoBtn.addEventListener('click', () => {
         showVideoModal('inpok4MKVLM');
     });
+
+    handleDisableSaveButton();
+    checkinSaveBtn.addEventListener("click", async () => {
+        handleSaveStatus("checkin");
+    });
+
+    checkoutSaveBtn.addEventListener("click", async () => {
+        handleSaveStatus("checkout");
+    });
 });
+
+function handleSaveStatus(status) {
+    const textarea = document.getElementById(status);
+    const statusText = textarea.value.trim();
+    const url = status === "checkin" ? "/checkin" : "/checkout";
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            status: statusText,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                setDisabledSaveButton(status === "checkin" ? checkinSaveBtn : checkoutSaveBtn);
+                textarea.disabled = true;
+                textarea.style.cursor = "not-allowed";
+                textarea.style.resize = "none";
+            }
+        })
+        .catch((error) => console.error(error));
+}
+
+function setDisabledSaveButton(btn) {
+    btn.disabled = true;
+    btn.style.cursor = "not-allowed";
+    btn.style.backgroundColor = "#ccc";
+    btn.style.color = "#000";
+}
+
+function handleDisableSaveButton(){
+    const currentButtonStyle = window.getComputedStyle(checkinSaveBtn);
+
+    // ----------CHECKIN-------------
+    const checkinTextarea = document.getElementById("checkin");
+    if (checkinTextarea.value.trim() !== "") {
+        checkinSaveBtn.disabled = false;
+        checkinSaveBtn.style = currentButtonStyle;
+    } else {
+        setDisabledSaveButton(checkinSaveBtn);
+    }
+    checkinTextarea.addEventListener("input", () => {
+        if (checkinTextarea.value.trim() !== "") {
+            checkinSaveBtn.disabled = false;
+            checkinSaveBtn.style = currentButtonStyle;
+        } else {
+            setDisabledSaveButton(checkinSaveBtn);
+        }
+    });
+
+    // ----------CHECKOUT-------------
+    const checkoutTextarea = document.getElementById("checkout");
+    if (checkoutTextarea.value.trim() !== "") {
+        checkoutSaveBtn.disabled = false;
+        checkoutSaveBtn.style = currentButtonStyle;
+    } else {
+        setDisabledSaveButton(checkoutSaveBtn);
+    }
+    checkoutTextarea.addEventListener("input", () => {
+        if (checkoutTextarea.value.trim() !== "") {
+            checkoutSaveBtn.disabled = false;
+            checkoutSaveBtn.style = currentButtonStyle;
+        } else {
+            setDisabledSaveButton(checkoutSaveBtn);
+        }
+    });
+}
 
 let player;
 
