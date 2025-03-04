@@ -44,7 +44,46 @@ document.addEventListener("DOMContentLoaded", () => {
     checkoutSaveBtn.addEventListener("click", async () => {
         handleSaveStatus("checkout");
     });
+
+    checkIfUserCheckedIn();
+    checkIfUserCheckedOut();
 });
+
+function checkIfUserCheckedIn() {
+    fetch("/checkin/todayStatus")
+        .then((response) => response.json())
+        .then((data) => {
+            if (data[0].date.split("T")[0] === new Date().toISOString().split("T")[0]) {
+                const checkinTextarea = document.getElementById("checkin");
+                checkinTextarea.value = data[0].status;
+                checkinTextarea.disabled = true;
+                checkinTextarea.style.cursor = "not-allowed";
+                checkinTextarea.style.resize = "none";
+                const label = checkinTextarea.parentNode.querySelector("label");
+                label.innerHTML = "Bạn đã checkin trạng thái ngày hôm nay!";
+                setDisabledSaveButton(checkinSaveBtn);
+            }
+        })
+        .catch((error) => console.error(error));
+}
+
+function checkIfUserCheckedOut() {
+    fetch("/checkout/todayStatus")
+        .then((response) => response.json())
+        .then((data) => {
+            if (data[0].date.split("T")[0] === new Date().toISOString().split("T")[0]) {
+                const checkoutTextarea = document.getElementById("checkout");
+                checkoutTextarea.value = data[0].status;
+                checkoutTextarea.disabled = true;
+                checkoutTextarea.style.cursor = "not-allowed";
+                checkoutTextarea.style.resize = "none";
+                const label = checkoutTextarea.parentNode.querySelector("label");
+                label.innerHTML = "Bạn đã checkout trạng thái ngày hôm nay!";
+                setDisabledSaveButton(checkoutSaveBtn);
+            }
+        })
+        .catch((error) => console.error(error));
+}
 
 function handleSaveStatus(status) {
     const textarea = document.getElementById(status);

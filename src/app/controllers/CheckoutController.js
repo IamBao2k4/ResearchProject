@@ -15,20 +15,14 @@ class CheckoutController {
     }
 
     // [GET] /checkout/todayStatus
-    getCheckoutStatus(req, res) {
+    async getTodayCheckoutStatus(req, res) {
         const userId = req.user._id;
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        checkout_status.findOne({ userId: userId, date: { $gte: today, $lt: tomorrow } })
-            .then((data) => {
-                res.json(data);
-            })
-            .catch((err) => {
-                res.json(err);
-            }
-            );
+        try {
+            const data = await checkout_status.find({userId: userId}).sort({date: -1}).limit(1);
+            res.json(data);
+        } catch (err) {
+            res.json(err);
+        }
     }
 
     // [POST] /checkout
