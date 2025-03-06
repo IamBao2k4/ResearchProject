@@ -446,6 +446,14 @@ class SiteController{
             user: mongooseToObject(user),
          });
     }
+
+    // [GET] /diary-status
+    async diaryStatus(req, res){
+        const user = await Users.findById(req.user.id);
+        res.render('diary_status', {
+            user: mongooseToObject(user),
+        });
+    }
 }
 
 module.exports = new SiteController;

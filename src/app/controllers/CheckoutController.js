@@ -4,8 +4,8 @@ const checkout_status = require("../models/checkout_status.js");
 class CheckoutController {
     // [GET] /checkout/all
     getAllCheckoutStatus(req, res) {
-        const userId = req.params.userId;
-        checkout_status.findMany({ userId: userId })
+        const userId = req.user._id;
+        checkout_status.find({ userId: userId })
             .then((data) => {
                 res.json(data);
             })

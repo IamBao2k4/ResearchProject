@@ -5,7 +5,7 @@ class CheckinController {
     // [GET] /checkin/all
     getAllCheckinStatus(req, res) {
         const userId = req.user._id;
-        checkin_status.findMany({ userId: userId })
+        checkin_status.find({ userId: userId })
             .then((data) => {
                 res.json(data);
             })

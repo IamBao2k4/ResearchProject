@@ -34,4 +34,8 @@ router.get("/practice/:score",
     siteController.checkAuthenticated,
     siteController.practice);
 
+router.get("/diary-status", 
+    siteController.checkAuthenticated,
+    siteController.diaryStatus);
+
 module.exports = router;
