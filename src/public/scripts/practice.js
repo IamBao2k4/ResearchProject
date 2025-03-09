@@ -1,4 +1,5 @@
-console.log('Script loaded');
+const checkinSaveBtn = document.querySelector(".checkin-save-btn");
+const checkoutSaveBtn = document.querySelector(".checkout-save-btn");
 
 document.addEventListener("DOMContentLoaded", () => {
     const stepTitles = document.querySelectorAll(".practice_step_title");
@@ -8,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const content = title.nextElementSibling;
             const step = title.closest('.practice_step');
             
-            // Nếu là bước 3, mở video modal
-            if (step.classList.contains('step_3')) {
+            // Nếu là bước 2, mở video modal
+            if (step.classList.contains('step_2')) {
                 showVideoModal('inpok4MKVLM');
                 return;
             }
@@ -34,7 +35,126 @@ document.addEventListener("DOMContentLoaded", () => {
     videoBtn.addEventListener('click', () => {
         showVideoModal('inpok4MKVLM');
     });
+
+    handleDisableSaveButton();
+    checkinSaveBtn.addEventListener("click", async () => {
+        handleSaveStatus("checkin");
+    });
+
+    checkoutSaveBtn.addEventListener("click", async () => {
+        handleSaveStatus("checkout");
+    });
+
+    checkIfUserCheckedIn();
+    checkIfUserCheckedOut();
 });
+
+function checkIfUserCheckedIn() {
+    fetch("/checkin/todayStatus")
+        .then((response) => response.json())
+        .then((data) => {
+            if (data[0].date.split("T")[0] === new Date().toISOString().split("T")[0]) {
+                const checkinTextarea = document.getElementById("checkin");
+                checkinTextarea.value = data[0].status;
+                checkinTextarea.disabled = true;
+                checkinTextarea.style.cursor = "not-allowed";
+                checkinTextarea.style.resize = "none";
+                const label = checkinTextarea.parentNode.querySelector("label");
+                label.innerHTML = "Bạn đã checkin trạng thái ngày hôm nay!";
+                setDisabledSaveButton(checkinSaveBtn);
+            }
+        })
+        .catch((error) => console.error(error));
+}
+
+function checkIfUserCheckedOut() {
+    fetch("/checkout/todayStatus")
+        .then((response) => response.json())
+        .then((data) => {
+            if (data[0].date.split("T")[0] === new Date().toISOString().split("T")[0]) {
+                const checkoutTextarea = document.getElementById("checkout");
+                checkoutTextarea.value = data[0].status;
+                checkoutTextarea.disabled = true;
+                checkoutTextarea.style.cursor = "not-allowed";
+                checkoutTextarea.style.resize = "none";
+                const label = checkoutTextarea.parentNode.querySelector("label");
+                label.innerHTML = "Bạn đã checkout trạng thái ngày hôm nay!";
+                setDisabledSaveButton(checkoutSaveBtn);
+            }
+        })
+        .catch((error) => console.error(error));
+}
+
+function handleSaveStatus(status) {
+    const textarea = document.getElementById(status);
+    const statusText = textarea.value.trim();
+    const url = status === "checkin" ? "/checkin" : "/checkout";
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            status: statusText,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                setDisabledSaveButton(status === "checkin" ? checkinSaveBtn : checkoutSaveBtn);
+                textarea.disabled = true;
+                textarea.style.cursor = "not-allowed";
+                textarea.style.resize = "none";
+            }
+        })
+        .catch((error) => console.error(error));
+}
+
+function setDisabledSaveButton(btn) {
+    btn.disabled = true;
+    btn.style.cursor = "not-allowed";
+    btn.style.backgroundColor = "#ccc";
+    btn.style.color = "#000";
+}
+
+function handleDisableSaveButton(){
+    const currentButtonStyle = window.getComputedStyle(checkinSaveBtn);
+
+    // ----------CHECKIN-------------
+    const checkinTextarea = document.getElementById("checkin");
+    if (checkinTextarea.value.trim() !== "") {
+        checkinSaveBtn.disabled = false;
+        checkinSaveBtn.style = currentButtonStyle;
+    } else {
+        setDisabledSaveButton(checkinSaveBtn);
+    }
+    checkinTextarea.addEventListener("input", () => {
+        if (checkinTextarea.value.trim() !== "") {
+            checkinSaveBtn.disabled = false;
+            checkinSaveBtn.style = currentButtonStyle;
+        } else {
+            setDisabledSaveButton(checkinSaveBtn);
+        }
+    });
+
+    // ----------CHECKOUT-------------
+    const checkoutTextarea = document.getElementById("checkout");
+    if (checkoutTextarea.value.trim() !== "") {
+        checkoutSaveBtn.disabled = false;
+        checkoutSaveBtn.style = currentButtonStyle;
+    } else {
+        setDisabledSaveButton(checkoutSaveBtn);
+    }
+    checkoutTextarea.addEventListener("input", () => {
+        if (checkoutTextarea.value.trim() !== "") {
+            checkoutSaveBtn.disabled = false;
+            checkoutSaveBtn.style = currentButtonStyle;
+        } else {
+            setDisabledSaveButton(checkoutSaveBtn);
+        }
+    });
+}
 
 let player;
 

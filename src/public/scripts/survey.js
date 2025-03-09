@@ -108,15 +108,22 @@ form.addEventListener("submit", async (e) => {
             if(score < 14) {
                 showModal(
                     "Kết quả đánh giá",
-                    `Điểm số của bạn là ${ score } (bé hơn 14 điểm) vì vậy bạn không có biểu hiện trầm cảm.`,
+                    `Điểm số của bạn là ${ score } (bé hơn 14 điểm) vì vậy bạn không có biểu hiện stress. Bạn có muốn thực hành phương pháp giảm căng thẳng không?`,
                     () => {
-                        window.location.replace("/");
+                        fetch(`/practice/${score}`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }).then(() => {
+                            window.location.replace(`/practice/${score}`);
+                        });
                     }
                 );
             } else if(score > 30) {
                 showModal(
                     "Kết quả đánh giá",
-                    `Điểm số của bạn là ${ score } (lớn hơn 30 điểm) vì vậy bạn có biểu hiện trầm cảm nặng, hãy liên hệ với bác sĩ để được tư vấn. Bạn có muốn đi tới trang hỗ trợ không?`,
+                    `Điểm số của bạn là ${ score } (lớn hơn 30 điểm) vì vậy bạn có biểu hiện stress nặng, hãy liên hệ với bác sĩ để được tư vấn. Bạn có muốn đi tới trang hỗ trợ không?`,
                     () => {
                         window.open("https://bookingcare.vn/co-so-y-te/vien-tu-van-tam-ly-sunnycare-p317", "_blank");
                         window.location.replace("/");

@@ -26,7 +26,6 @@ class beck_answerController {
     async getAll(req, res) {
         try {
             const answers = await beck_answer.find();
-            console.log("answers", answers);
             return res.status(200).json(answers);
         } catch (error) {
             return res.status(500).json({ message: error.message });
@@ -97,8 +96,9 @@ class beck_answerController {
             // Lưu điểm vào beck_score
             await beck_score.create({ userId: user._id, score });
             
-            // Cập nhật lastSurveyScore cho user
+            // Cập nhật lastSurveyScore và surveyDate cho user 
             await Users.findByIdAndUpdate(user._id, { lastSurveyScore: score });
+            await Users.findByIdAndUpdate(user._id, { surveyDate: new Date() });
 
             return res.status(201).json({ message: "Score created successfully" });
         } catch (error) {

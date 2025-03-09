@@ -1,5 +1,3 @@
-// ...existing code...
-
 document.querySelector('.logout-button').addEventListener('click', function() {
     // Gửi yêu cầu đăng xuất tới server
     fetch('/logout', {

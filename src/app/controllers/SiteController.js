@@ -1,4 +1,3 @@
-const { render } = require("../../app");
 const Users = require("../models/Users");
 const UsersVerification = require("../models/UsersVerification");
 
@@ -8,6 +7,10 @@ const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 const passport = require("passport");
 const jwt = require('jsonwebtoken');
+const { default: mongoose } = require("mongoose");
+
+const { mutipleMongooseToObject } = require("../../util/mongoose");
+const { mongooseToObject } = require("../../util/mongoose");
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -179,8 +182,16 @@ class SiteController{
     }
 
     // [GET] /home
-    home(req, res){
-        res.render('home');
+     async home(req, res){
+        let user;
+        if(req.user){
+           user = await Users.findById(req.user.id); 
+        }
+        res.render('home', 
+            {
+                user: mongooseToObject(user),
+            }
+        );
     }
 
     // [GET] /register
@@ -226,6 +237,16 @@ class SiteController{
                 errors: ["Server error. Please try again later."],
             });
         }
+    }
+
+    // [POST] /logout
+    logout(req, res, next) {
+        req.logout(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.redirect("/login");
+        });
     }
 
     // [GET] /verify/:userId/:uniqueString
@@ -410,14 +431,28 @@ class SiteController{
     }
 
     // [GET] /survey
-    survey(req, res){
-        res.render('survey');
+    async survey(req, res){
+        const user = await Users.findOne({ _id: req.user._id });
+        res.render('survey', {
+            user: mongooseToObject(user),
+        });
     }
 
     // [GET] /practice/:score
-    practice(req, res){
+    async practice(req, res){
         const { score } = req.params;
-        res.render('practice', { score });
+        const user = await Users.findById(req.user.id);
+        res.render('practice', { score,
+            user: mongooseToObject(user),
+         });
+    }
+
+    // [GET] /diary-status
+    async diaryStatus(req, res){
+        const user = await Users.findById(req.user.id);
+        res.render('diary_status', {
+            user: mongooseToObject(user),
+        });
     }
 }
 

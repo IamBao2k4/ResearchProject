@@ -2,13 +2,7 @@ const express = require("express");
 const router = express.Router();
 const siteController = require("../app/controllers/SiteController.js");
 
-router.get("/", (req, res) => {
-    res.render("home", { 
-        user: req.user,
-        avatar: req.user?.avatar || '/img/anonymous-avatar.png',
-        lastSurveyScore: req.user?.lastSurveyScore
-    });
-});
+router.get("/", siteController.home);
 
 router.get("/login", 
     siteController.checkNotAuthenticated,
@@ -21,6 +15,8 @@ router.get("/register",
     siteController.register);
 
 router.post("/register", siteController.registerPost);
+
+router.post("/logout", siteController.logout);
 
 router.get("/verify/:userId/:uniqueString", siteController.verifyEmail);
 
@@ -35,5 +31,9 @@ router.get("/survey",
     siteController.survey);
 
 router.get("/practice/:score", siteController.practice);
+
+router.get("/diary-status", 
+    siteController.checkAuthenticated,
+    siteController.diaryStatus);
 
 module.exports = router;
