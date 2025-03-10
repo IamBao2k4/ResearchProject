@@ -2,6 +2,8 @@ const beck_answer = require("../models/beck_answer.js");
 const beck_question = require("../models/beck_question.js");
 const beck_score = require("../models/beck_score.js");
 const Users = require("../models/Users.js");
+const checkin_status = require("../models/checkin_status.js");
+const checkout_status = require("../models/checkout_status.js");
 
 class beck_answerController {
 
@@ -101,6 +103,38 @@ class beck_answerController {
             await Users.findByIdAndUpdate(user._id, { surveyDate: new Date() });
 
             return res.status(201).json({ message: "Score created successfully" });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
+    // [GET] /api/all-status-date
+    async getAllStatusDate(req, res) {
+        try {
+            const userId = req.user._id;
+
+            const checkinStatus = await checkin_status.find({ userId: userId }).sort({ date: -1 });
+            const checkoutStatus = await checkout_status.find({ userId: userId }).sort({ date: -1 });
+
+            let dates = [];
+
+            checkinStatus.forEach(checkin => {
+                const dateStr = checkin.date.toISOString().split("T")[0];
+                if (!dates.includes(dateStr)) {
+                    dates.push(dateStr);
+                }
+            });
+    
+            checkoutStatus.forEach(checkout => {
+                const dateStr = checkout.date.toISOString().split("T")[0];
+                if (!dates.includes(dateStr)) {
+                    dates.push(dateStr);
+                }
+            });
+
+            const uniqueDates = dates.sort((a, b) => new Date(a) - new Date(b));
+
+            return res.status(200).json(uniqueDates);
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }

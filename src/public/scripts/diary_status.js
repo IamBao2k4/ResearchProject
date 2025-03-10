@@ -1,59 +1,194 @@
-const emotionsLog = document.querySelector('.emotions-log');
+document.addEventListener('DOMContentLoaded',async function () {
+    const frontCover = document.getElementById('front-cover');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    let pages;
+    let totalPages;
+    let currentPage = 0;
+    let isAnimating = false;
 
-async function getAllCheckinStatus() {
-    const response = await fetch('/checkin/all');
-    const data = await response.json();
-    return data;
-}
+    await loadDiaryStatus();
 
-async function getAllCheckoutStatus() {
-    const response = await fetch('/checkout/all');
-    const data = await response.json();
-    return data;
-}
+    // Initialize page positions
+    function initPages() {
+        // Set all pages to initial position (behind cover)
+        pages.forEach((page, index) => {
+            page.style.transform = 'rotateY(0deg)';
+            page.style.zIndex = totalPages - index;
+            if (index > 0) {
+                // Hide all pages except the first one
+                page.style.visibility = 'hidden';
+            }
+        });
+    }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const checkinStatus = await getAllCheckinStatus();
-    const checkoutStatus = await getAllCheckoutStatus();
+    initPages();
 
-    let dates = [];
+    let isNext = false;
+    let isPrev = false;
 
-    checkinStatus.forEach(checkin => {
-        if (!dates.includes(checkin.date.split("T")[0])) {
-            dates.push(checkin.date.split("T")[0]);
+    // Turn to previous page
+    function prevPage() {
+        if (currentPage >= 0 && !isAnimating) {
+            isAnimating = true;
+
+            if(isNext && currentPage > 0) currentPage--;
+
+            if (currentPage === 0) {
+                // Return to cover
+                frontCover.style.transform = 'rotateY(0deg)';
+                // Hide the first page
+                setTimeout(() => {
+                    pages[0].style.visibility = 'hidden';
+                }, 700);
+            } else {
+                
+                // Flip the current page back
+                pages[currentPage - 1].style.transform = 'rotateY(0deg)';
+                pages[currentPage - 1].classList.remove('flipped');
+
+                pages[currentPage - 1].style.visibility = 'visible';
+                currentPage--;
+            }
+
+            isPrev = true;
+            isNext = false;
+            updateButtons();
+            
+            isAnimating = false;
+        }
+    }
+
+    // Turn to next page
+    function nextPage() {
+        if (currentPage < totalPages && !isAnimating) {
+            isAnimating = true;
+
+            if(isPrev && currentPage < totalPages && currentPage > 0) currentPage++;
+
+            if (currentPage === 0) {
+                // Open the cover
+                frontCover.style.transform = 'rotateY(-180deg)';
+                // Show the first page
+                pages[0].style.visibility = 'visible';
+            } else {
+                // Flip the current page
+                pages[currentPage - 1].style.transform = 'rotateY(-180deg)';
+                pages[currentPage - 1].classList.add('flipped');
+
+                // Show the next page
+                if (currentPage < totalPages) {
+                    pages[currentPage].style.visibility = 'visible';
+                }
+                
+            }
+
+            currentPage++;
+            
+            isPrev = false;
+            isNext = true;
+
+            updateButtons();
+
+            setTimeout(() => {
+                isAnimating = false;
+            }, 700);
+        }
+    }
+
+    // Update button states
+    function updateButtons() {
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = currentPage === totalPages;
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', prevPage);
+    nextBtn.addEventListener('click', nextPage);
+
+    // Optional: Add keyboard navigation
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+            prevPage();
+        } else if (e.key === 'ArrowRight') {
+            nextPage();
         }
     });
-    
-    checkoutStatus.forEach(checkout => {
-        if (!dates.includes(checkout.date.split("T")[0])) {
-            dates.push(checkout.date.split("T")[0]);
+
+    // load diary status data
+
+    async function loadDates() {
+        const response = await fetch('/api/all-status-date');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    });
+        const data = await response.json();
+        return data;
+    }
 
-    console.log("checkinStatus", checkinStatus);
-    console.log("checkoutStatus", checkoutStatus);
+    async function loadCheckinStatus()
+    {
+        const response = await fetch('/checkin/all');
+        const data = await response.json();
+        return data;
+    }
 
-    const uniqueDates = dates.sort((a, b) => new Date(b) - new Date(a));
+    async function loadCheckoutStatus()
+    {
+        const response = await fetch('/checkout/all');
+        const data = await response.json();
+        return data;
+    }
 
-    console.log("uniqueDates", uniqueDates);
+    async function loadDiaryStatus()
+    {
+        const dates = await loadDates();
+        const checkinStatus = await loadCheckinStatus();
+        const checkoutStatus = await loadCheckoutStatus();
+        const book = document.querySelector('.book');
 
-    uniqueDates.forEach(date => {
-        const checkin = checkinStatus.find(checkin => checkin.date.split("T")[0] === date);
-        const checkout = checkoutStatus.find(checkout => checkout.date.split("T")[0] === date);
+        for (let i = 0; i < dates.length; i++) {
+            let date = dates[i];
+            console.log("Date: ", date);
+            let checkin = checkinStatus.find(status => new Date(status.date).toISOString().split("T")[0] === date);
+            let checkout = checkoutStatus.find(status => new Date(status.date).toISOString().split("T")[0] === date);
 
-        const emotionDiv = document.createElement('div');
-        emotionDiv.classList.add('log-entry');
-        emotionDiv.innerHTML = `
-            <div class="date">${date}</div>
-            <div class="emotion-status">
-                <div class="emotion-icon">
-                    <img src="/images/emotions/.svg" alt="">
+            let page = document.createElement('div');
+            page.classList.add('page');
+            const pageClass = 'page'+(i+1); 
+            page.classList.add(pageClass);
+            page.innerHTML = `
+                <div class="page-content">
+                    <div class="diary-date">${date}</div>
+                    <h2 class="diary-title">Cảm xúc thường ngày.</h2>
+                    <div class="diary-content">
+                        <p>Cảm xúc đầu ngày: </p>
+                        <p>${checkin?.status || "Bạn chưa checkin cảm xúc đầu ngày!"}</p>
+                        <p>Cảm xúc cuối ngày: </p>
+                        <p>${checkout?.status || "Bạn chưa checkout cảm xúc cuối ngày!"}</p>
+                    </div>
+                    <div class="page-number">${i + 1}</div>
+                    <div class="page-curl"></div>
                 </div>
-                <div class="emotion-text"></div>
-            </div>
-            <div class="status">${checkin?.status || "Bạn chưa checkin cảm xúc vào ngày này!"}</div>
-            <div class="status">${checkout?.status || "Bạn chưa checkout cảm xúc vào ngày này!"}</div>
             `;
-        emotionsLog.appendChild(emotionDiv);
-    });
+
+            book.appendChild(page);
+        }
+
+        const backCover = document.createElement('div');
+        backCover.classList.add('page');
+        backCover.id = 'back-cover';
+        backCover.innerHTML = `
+            <div class="page-content"
+                style="background-color: #8b4513; color: #f5f5dc; display: flex; justify-content: center; align-items: center; text-align: center;">
+                <p>"The diary is an exercise in freedom—a space to process, reflect, and dream."</p>
+            </div>
+        `;
+
+        book.appendChild(backCover);
+        pages = document.querySelectorAll('.page');
+        totalPages = pages.length - 1;
+    }
+
+
 });

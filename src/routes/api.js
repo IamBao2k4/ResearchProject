@@ -14,4 +14,7 @@ router.post('/beck_score',
     authMiddleware,
     BECKController.beck_score);
 
+router.get('/all-status-date', 
+    BECKController.getAllStatusDate);
+
 module.exports = router;
