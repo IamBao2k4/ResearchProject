@@ -441,10 +441,17 @@ class SiteController{
     // [GET] /practice/:score
     async practice(req, res){
         const { score } = req.params;
-        const user = await Users.findById(req.user.id);
-        res.render('practice', { score,
-            user: mongooseToObject(user),
-         });
+        let user = null;
+        
+        if (req.user) {
+            user = await Users.findById(req.user.id);
+            user = mongooseToObject(user);
+        }
+        
+        res.render('practice', { 
+            score,
+            user: user,
+        });
     }
 
     // [GET] /diary-status

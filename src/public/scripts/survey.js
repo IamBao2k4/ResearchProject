@@ -165,18 +165,30 @@ function updateProgress() {
     const progressFill = document.querySelector('.progress-fill');
     const currentQuestionSpan = document.getElementById('current-question');
     
-    const progress = (answeredQuestions / totalQuestions) * 100;
-    progressFill.style.width = `${progress}%`;
-    currentQuestionSpan.textContent = answeredQuestions;
+    // Đảm bảo các phần tử đã được tìm thấy
+    if (progressFill && currentQuestionSpan) {
+        const progress = (answeredQuestions / totalQuestions) * 100;
+        progressFill.style.width = `${progress}%`;
+        currentQuestionSpan.textContent = answeredQuestions;
+        
+        // Log để debug
+        console.log(`Progress updated: ${answeredQuestions}/${totalQuestions} (${progress}%)`);
+    } else {
+        console.error('Progress elements not found');
+    }
 }
 
-// Thêm event listener cho tất cả radio buttons
+// Đảm bảo thêm event listener cho tất cả radio buttons sau khi DOM đã tải xong
 document.addEventListener('DOMContentLoaded', () => {
-    const radioButtons = document.querySelectorAll('input[type="radio"]');
-    radioButtons.forEach(radio => {
-        radio.addEventListener('change', updateProgress);
-    });
-    updateProgress(); // Cập nhật ngay khi trang tải xong
+    // Đợi một chút để đảm bảo các câu hỏi đã được tạo ra
+    setTimeout(() => {
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', updateProgress);
+        });
+        console.log(`Added event listeners to ${radioButtons.length} radio buttons`);
+        updateProgress(); // Cập nhật ngay khi trang tải xong
+    }, 500);
 });
 
 function showModal(title, message, onConfirm) {

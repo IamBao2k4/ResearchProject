@@ -9,6 +9,7 @@
     "watch-css": "sass --embed-source-map --watch src/resources/scss:src/public/stylesheets/"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
     "bcrypt": "^5.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

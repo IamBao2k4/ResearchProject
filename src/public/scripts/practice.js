@@ -284,8 +284,7 @@ function showCongratulations() {
             </div>
             <p class="modal-message">Bạn đã hoàn thành bài tập thiền định. Hãy tiếp tục duy trì thói quen này nhé!</p>
             <div class="modal-buttons">
-                <button class="modal-btn modal-btn-survey">Khảo sát lại</button>
-                <button class="modal-btn modal-btn-home">Về trang chủ</button>
+                <button class="modal-btn modal-btn-continue">Tiếp tục</button>
             </div>
         </div>
     `;
@@ -311,19 +310,12 @@ function showCongratulations() {
     };
 
     // Xử lý các nút
-    const surveyBtn = modal.querySelector('.modal-btn-survey');
-    const homeBtn = modal.querySelector('.modal-btn-home');
+    const continueBtn = modal.querySelector('.modal-btn-continue');
     
-    surveyBtn.addEventListener('click', () => {
-        closeModal();
-        window.location.href = '/survey';
-    });
-    
-    homeBtn.addEventListener('click', () => {
+    continueBtn.addEventListener('click', () => {
         // Lưu trạng thái vào localStorage
         localStorage.setItem('hideVideoButton', 'true');
         closeModal();
-        window.location.href = '/';
     });
 
     // Click outside to close

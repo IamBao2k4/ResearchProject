@@ -585,6 +585,17 @@ $max-width: 1200px;
         padding: 8px 20px;
         font-size: 1rem;
     }
+
+    .showcase-section {
+        .main-showcase {
+            .showcase-img {
+                height: auto;
+                max-height: 350px;
+                object-fit: contain;
+                padding: 10px;
+            }
+        }
+    }
 }
 
 @media (max-width: 480px) {
@@ -988,6 +999,17 @@ $max-width: 1200px;
 // Tablet & Mobile
 @media screen and (max-width: 768px) {
     #home {
+        .showcase-section {
+            .main-showcase {
+                .showcase-img {
+                    height: auto;
+                    max-height: 350px;
+                    object-fit: contain;
+                    padding: 10px;
+                }
+            }
+        }
+        
         .about-section {
             .team-container {
                 .team-members {
@@ -1032,6 +1054,32 @@ $max-width: 1200px;
                     .team-member {
                         max-width: 250px;
                     }
+                }
+            }
+        }
+
+        .showcase-section {
+            .main-showcase {
+                .showcase-img {
+                    height: auto;
+                    max-height: 300px;
+                    width: 100%;
+                    object-fit: contain;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+}
+
+// Mobile Small
+@media screen and (max-width: 480px) {
+    #home {
+        .showcase-section {
+            .main-showcase {
+                .showcase-img {
+                    max-height: 250px;
+                    padding: 5px;
                 }
             }
         }
