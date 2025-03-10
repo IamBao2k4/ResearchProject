@@ -90,8 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentPage >= 0 && !isAnimating) {
             isAnimating = true;
 
-            console.log("prev btn currentPage", currentPage);
-
             if(isNext && currentPage > 0) currentPage--;
 
             if (currentPage === 0) {
@@ -123,8 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function nextPage() {
         if (currentPage < totalPages && !isAnimating) {
             isAnimating = true;
-
-            console.log("next btn currentPage", currentPage);
 
             if(isPrev && currentPage < totalPages && currentPage > 0) currentPage++;
 
