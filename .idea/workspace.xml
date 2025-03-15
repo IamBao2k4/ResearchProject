@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e129257-fe3a-4585-a66c-2fea67ac2da6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/scripts/practice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/scripts/practice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/stylesheets/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/stylesheets/app.css" afterDir="false" />
-    </list>
+    <list default="true" id="6e129257-fe3a-4585-a66c-2fea67ac2da6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
