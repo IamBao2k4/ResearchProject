@@ -16,7 +16,7 @@ const Users = new Schema(
         avatar: {
             type: String,
             default:
-                "https://hrrwodexesxgushgnrtg.supabase.co/storage/v1/object/public/images//default-user.jpg",
+                "https://pmhsxvhplpoicxuhzgqb.supabase.co/storage/v1/object/public/images//default-user.jpg",
         },
         role: { type: String, default: "Customer" },
         isBanned: { type: Boolean, default: false },

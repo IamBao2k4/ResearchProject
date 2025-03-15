@@ -30,7 +30,9 @@ router.get("/survey",
     siteController.checkAuthenticated,
     siteController.survey);
 
-router.get("/practice/:score", siteController.practice);
+router.get("/practice/:score", 
+    siteController.checkAuthenticated,
+    siteController.practice);
 
 router.get("/diary-status", 
     siteController.checkAuthenticated,

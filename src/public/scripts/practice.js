@@ -1,40 +1,52 @@
 const checkinSaveBtn = document.querySelector(".checkin-save-btn");
 const checkoutSaveBtn = document.querySelector(".checkout-save-btn");
 
+const videos = [
+    { id: 'inpok4MKVLM', title: 'Video 1' },
+    { id: 'dQw4w9WgXcQ', title: 'Video 2' },
+    { id: '3JZ_D3ELwOQ', title: 'Video 3' },
+    { id: 'L_jWHffIx5E', title: 'Video 4' },
+    { id: 'eVTXPUF4Oz4', title: 'Video 5' },
+    { id: 'hTWKbfoikeg', title: 'Video 6' },
+    { id: 'kXYiU_JCYtU', title: 'Video 7' },
+    { id: 'ktvTqknDobU', title: 'Video 8' },
+    { id: 'y6120QOlsfU', title: 'Video 9' },
+    { id: 'CevxZvSJLk8', title: 'Video 10' }
+];
+
 document.addEventListener("DOMContentLoaded", () => {
     const stepTitles = document.querySelectorAll(".practice_step_title");
-    
+
     stepTitles.forEach((title) => {
         title.addEventListener("click", () => {
             const content = title.nextElementSibling;
             const step = title.closest('.practice_step');
-            
-            // Nếu là bước 2, mở video modal
-            if (step.classList.contains('step_2')) {
-                showVideoModal('inpok4MKVLM');
-                return;
-            }
 
-            // Các bước khác thì toggle content bình thường
+            // Toggle content visibility
             if (content.style.display === "none" || content.style.display === "") {
                 content.style.display = "block";
             } else {
                 content.style.display = "none";
             }
+
+            // Show video list when step_2 is clicked
+            if (step.classList.contains('step_2')) {
+                showMiniVideoList(videos);
+            }
         });
     });
 
-    // Thay đổi nội dung của player div thành button
-    const playerDiv = document.getElementById('player');
-    playerDiv.innerHTML = `
-        <button class="video-btn">Xem video hướng dẫn thiền định</button>
-    `;
+    // // Thay đổi nội dung của player div thành button
+    // const playerDiv = document.getElementById('player');
+    // playerDiv.innerHTML = `
+    //     <button class="video-btn">Xem video hướng dẫn thiền định</button>
+    // `;
 
-    // Xử lý sự kiện click button
-    const videoBtn = playerDiv.querySelector('.video-btn');
-    videoBtn.addEventListener('click', () => {
-        showVideoModal('inpok4MKVLM');
-    });
+    // // Xử lý sự kiện click button
+    // const videoBtn = playerDiv.querySelector('.video-btn');
+    // videoBtn.addEventListener('click', () => {
+    //     showVideoModal('inpok4MKVLM');
+    // });
 
     handleDisableSaveButton();
     checkinSaveBtn.addEventListener("click", async () => {
@@ -48,6 +60,105 @@ document.addEventListener("DOMContentLoaded", () => {
     checkIfUserCheckedIn();
     checkIfUserCheckedOut();
 });
+
+function showMiniVideoList(videos) {
+    const modal = document.createElement('div');
+    modal.className = 'mini-video-list-modal';
+    modal.innerHTML = `
+        <div class="mini-video-list-modal-content">
+            <h2>Chọn video để xem</h2>
+            <div class="mini-video-list">
+                ${videos.map(video => `
+                    <div class="mini-video-list-item" data-video-id="${video.id}">
+                        <img src="https://img.youtube.com/vi/${video.id}/0.jpg" alt="${video.title}">
+                    </div>
+                `).join('')}
+            </div>
+            <button class="close-modal">&times;</button>
+        </div>
+    `;
+
+    const step_2 = document.querySelector('.step_2');
+    const videoListContainer = step_2.querySelector('.practice_step_content');
+    videoListContainer.appendChild(modal);
+    setTimeout(() => modal.classList.add('show'), 10);
+    // Handle click event on each video list item
+    const videoItems = modal.querySelectorAll('.mini-video-list-item');
+    videoItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const videoId = item.getAttribute('data-video-id');
+            showVideoModal(videoId);
+            modal.classList.remove('show');
+            setTimeout(() => modal.remove(), 300);
+        });
+    });
+
+    // Handle close modal
+    const closeBtn = modal.querySelector('.close-modal');
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => modal.remove(), 300);
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => modal.remove(), 300);
+        }
+    });
+}
+
+
+function showVideoModal(videoId) {
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+    modal.innerHTML = `
+        <div class="video-modal-content">
+            <div class="video-container">
+                <iframe 
+                    id="youtube-player"
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
+                    title="Hướng dẫn thiền định"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <button class="close-modal">&times;</button>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    setTimeout(() => modal.classList.add('show'), 10);
+
+    // Load YouTube API if not already loaded
+    if (!window.YT) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    } else {
+        onYouTubeIframeAPIReady();
+    }
+
+    // Handle close modal
+    const closeBtn = modal.querySelector('.close-modal');
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => modal.remove(), 300);
+        window.location.reload();
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => modal.remove(), 300);
+            window.location.reload();
+        }
+    });
+}
 
 function checkIfUserCheckedIn() {
     fetch("/checkin/todayStatus")
@@ -171,55 +282,6 @@ function onYouTubeIframeAPIReady() {
                     }, 300);
                 }
             }
-        }
-    });
-}
-
-function showVideoModal(videoId) {
-    const modal = document.createElement('div');
-    modal.className = 'video-modal';
-    modal.innerHTML = `
-        <div class="video-modal-content">
-            <div class="video-container">
-                <iframe 
-                    id="youtube-player"
-                    width="100%" 
-                    height="100%" 
-                    src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
-                    title="Hướng dẫn thiền định"
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen
-                ></iframe>
-            </div>
-            <button class="close-modal">&times;</button>
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-    setTimeout(() => modal.classList.add('show'), 10);
-
-    // Load YouTube API nếu chưa được load
-    if (!window.YT) {
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    } else {
-        onYouTubeIframeAPIReady();
-    }
-
-    // Xử lý đóng modal
-    const closeBtn = modal.querySelector('.close-modal');
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('show');
-        setTimeout(() => modal.remove(), 300);
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('show');
-            setTimeout(() => modal.remove(), 300);
         }
     });
 }
