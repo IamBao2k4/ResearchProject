@@ -24,5 +24,20 @@ router.post(
     profileController.updatePassword
 );
 
+router.post('/update-finished-steps',
+    siteController.checkAuthenticated,
+    profileController.updateFinishedSteps);
+
+router.get('/get-finished-steps',
+    siteController.checkAuthenticated,
+    profileController.getFinishedSteps);
+
+router.post('/update-watched-videos',
+    siteController.checkAuthenticated,
+    profileController.updateWatchedVideos);
+
+router.get('/get-watched-videos',
+    siteController.checkAuthenticated,
+    profileController.getWatchedVideos);
 
 module.exports = router;

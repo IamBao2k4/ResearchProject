@@ -10,6 +10,7 @@ const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const bcrypt = require("bcrypt");
+const { finished } = require('nodemailer/lib/xoauth2');
 
 class ProfileController {
     // [GET] /profile
@@ -151,6 +152,58 @@ class ProfileController {
                 success: false,
                 errors: "Internal Server Error",
             });
+        }
+    }
+
+    // [POST] /profile/update-finished-steps
+    async updateFinishedSteps(req, res) {
+        try {
+            const userId = req.user.id;
+            const finishedSteps = req.body.finishedSteps;
+
+            await Users.findByIdAndUpdate(userId, { finishedSteps }, { new: true });
+            res.status(200).json({ message: "Finished steps updated successfully" });
+        } catch (error) {
+            console.error("Error updating finished steps:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+
+    // [GET] /profile/get-finished-steps
+    async getFinishedSteps(req, res) {
+        try {
+            const userId = req.user.id;
+            const user = await Users.findById(userId);
+            res.status(200).json({ finishedSteps: user.finishedSteps });
+        } catch (error) {
+            console.error("Error getting finished steps:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+
+    // [POST] /profile/update-watched-videos
+    async updateWatchedVideos(req, res) {
+        try {
+            const userId = req.user.id;
+            const watchedVideos = req.body.watchedVideos;
+
+            await Users.findByIdAndUpdate(userId, { watchedVideos }, { new: true });
+            res.status(200).json({ message: "Watched videos updated successfully" });
+        } catch (error) {
+            console.error("Error updating watched videos:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+
+    // [GET] /profile/get-watched-videos
+    async getWatchedVideos(req, res) {
+        try {
+            const userId = req.user.id;
+            const user = await Users.findById(userId);
+            res.status(200).json({ watchedVideos: user.watchedVideos });
+        } catch (error) {
+            console.error("Error getting watched videos:", error);
+            res.status(500).json({ error: "Internal Server Error" });
         }
     }
 }
