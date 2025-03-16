@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e129257-fe3a-4585-a66c-2fea67ac2da6" name="Changes" comment="" />
+    <list default="true" id="6e129257-fe3a-4585-a66c-2fea67ac2da6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/controllers/AuthController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/controllers/AuthController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/ggpassport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/ggpassport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/scripts/diary_status.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/scripts/diary_status.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/stylesheets/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/stylesheets/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/public/stylesheets/app.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/stylesheets/app.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/scss/_diaryStatus.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/scss/_diaryStatus.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/scss/_footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/scss/_footer.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/views/diary_status.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/views/diary_status.hbs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
