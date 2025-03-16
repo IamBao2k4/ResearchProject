@@ -29,8 +29,9 @@ const videos = [
     { id: 'CevxZvSJLk8', title: 'Video 10', index: 10 },
 ];
 
+let finishedSteps = 1;
 document.addEventListener("DOMContentLoaded", async () => {
-    const finishedSteps = await fetch("/profile/get-finished-steps")
+    finishedSteps = await fetch("/profile/get-finished-steps")
         .then((response) => response.json())
         .then((data) => data.finishedSteps[0]);
 
@@ -65,13 +66,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 })
                 .then((response) => response.json())
                 .then(() => {
-                    window.location.reload();
+                    finishedSteps = step.classList.contains("step_2") ? 3 : 4;
+                    setVisibleSteps(finishedSteps);
                 })
             }
         });
     });
 
-    handleDisableSaveButton();
     checkinSaveBtn.addEventListener("click", async () => {
         handleSaveStatus("checkin");
     });
@@ -196,12 +197,17 @@ function checkIfUserCheckedIn() {
         .then((response) => response.json())
         .then((data) => {
             if (data[0].date.split("T")[0] === new Date().toISOString().split("T")[0]) {
-                const checkinTextarea = document.getElementById("checkin");
-                checkinTextarea.value = data[0].status;
-                checkinTextarea.disabled = true;
-                checkinTextarea.style.cursor = "not-allowed";
-                checkinTextarea.style.resize = "none";
-                const label = checkinTextarea.parentNode.querySelector("label");
+                const checkin_radio_group = document.querySelectorAll(".radio-container")[0];
+                const checkinRadios = checkin_radio_group.querySelectorAll("input[type='radio']");
+                checkinRadios.forEach((radio) => {
+                    radio.disabled = true;
+                    if (radio.nextElementSibling.innerHTML === data[0].status) {
+                        radio.nextElementSibling.style.color = "#000";
+                        radio.nextElementSibling.style.fontWeight = "bold";
+                        radio.nextElementSibling.style.cursor = "not-allowed";
+                    }
+                });
+                const label = checkin_radio_group.parentNode.querySelector("label");
                 label.innerHTML = "Bạn đã checkin trạng thái ngày hôm nay!";
                 setDisabledSaveButton(checkinSaveBtn);
             }
@@ -214,12 +220,17 @@ function checkIfUserCheckedOut() {
         .then((response) => response.json())
         .then((data) => {
             if (data[0].date.split("T")[0] === new Date().toISOString().split("T")[0]) {
-                const checkoutTextarea = document.getElementById("checkout");
-                checkoutTextarea.value = data[0].status;
-                checkoutTextarea.disabled = true;
-                checkoutTextarea.style.cursor = "not-allowed";
-                checkoutTextarea.style.resize = "none";
-                const label = checkoutTextarea.parentNode.querySelector("label");
+                const checkout_radio_group = document.querySelectorAll(".radio-container")[1];
+                const checkoutRadios = checkout_radio_group.querySelectorAll("input[type='radio']");
+                checkoutRadios.forEach((radio) => {
+                    radio.disabled = true;
+                    if (radio.nextElementSibling.innerHTML === data[0].status) {
+                        radio.nextElementSibling.style.color = "#000";
+                        radio.nextElementSibling.style.fontWeight = "bold";
+                        radio.nextElementSibling.style.cursor = "not-allowed";
+                    }
+                });
+                const label = checkout_radio_group.parentNode.querySelector("label");
                 label.innerHTML = "Bạn đã checkout trạng thái ngày hôm nay!";
                 setDisabledSaveButton(checkoutSaveBtn);
             }
@@ -228,8 +239,20 @@ function checkIfUserCheckedOut() {
 }
 
 async function handleSaveStatus(status) {
-    const textarea = document.getElementById(status);
-    const statusText = textarea.value.trim();
+    let radio_group = document.querySelectorAll(".radio-container")[0];
+    if(status === "checkout"){
+        radio_group = document.querySelectorAll(".radio-container")[1];
+    }
+
+    const radios = radio_group.querySelectorAll("input[type='radio']");
+
+    const selectedRadio = radio_group.querySelector("input[type='radio']:checked");
+    if (!selectedRadio) {
+        alert("Vui lòng chọn trạng thái!");
+        return;
+    }
+
+    const statusText = selectedRadio.nextElementSibling.innerHTML;
     const url = status === "checkin" ? "/checkin" : "/checkout";
 
     await fetch(url, {
@@ -245,9 +268,12 @@ async function handleSaveStatus(status) {
         .then((data) => {
             if (data.success) {
                 setDisabledSaveButton(status === "checkin" ? checkinSaveBtn : checkoutSaveBtn);
-                textarea.disabled = true;
-                textarea.style.cursor = "not-allowed";
-                textarea.style.resize = "none";
+                radios.forEach((radio) => {
+                    radio.disabled = true;
+                });
+                selectedRadio.nextElementSibling.style.color = "#000";
+                selectedRadio.nextElementSibling.style.fontWeight = "bold";
+                selectedRadio.nextElementSibling.style.cursor = "not-allowed";
             }
 
             fetch("/profile/update-finished-steps", {
@@ -273,44 +299,6 @@ function setDisabledSaveButton(btn) {
     btn.style.cursor = "not-allowed";
     btn.style.backgroundColor = "#ccc";
     btn.style.color = "#000";
-}
-
-function handleDisableSaveButton(){
-    const currentButtonStyle = window.getComputedStyle(checkinSaveBtn);
-
-    // ----------CHECKIN-------------
-    const checkinTextarea = document.getElementById("checkin");
-    if (checkinTextarea.value.trim() !== "") {
-        checkinSaveBtn.disabled = false;
-        checkinSaveBtn.style = currentButtonStyle;
-    } else {
-        setDisabledSaveButton(checkinSaveBtn);
-    }
-    checkinTextarea.addEventListener("input", () => {
-        if (checkinTextarea.value.trim() !== "") {
-            checkinSaveBtn.disabled = false;
-            checkinSaveBtn.style = currentButtonStyle;
-        } else {
-            setDisabledSaveButton(checkinSaveBtn);
-        }
-    });
-
-    // ----------CHECKOUT-------------
-    const checkoutTextarea = document.getElementById("checkout");
-    if (checkoutTextarea.value.trim() !== "") {
-        checkoutSaveBtn.disabled = false;
-        checkoutSaveBtn.style = currentButtonStyle;
-    } else {
-        setDisabledSaveButton(checkoutSaveBtn);
-    }
-    checkoutTextarea.addEventListener("input", () => {
-        if (checkoutTextarea.value.trim() !== "") {
-            checkoutSaveBtn.disabled = false;
-            checkoutSaveBtn.style = currentButtonStyle;
-        } else {
-            setDisabledSaveButton(checkoutSaveBtn);
-        }
-    });
 }
 
 let player;

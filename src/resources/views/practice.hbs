@@ -11,7 +11,27 @@
                 </div>
                 <div class="practice_step_content_item_content">
                     <label for="checkin">Cảm xúc của bạn trong ngày hôm nay như thế nào.</label>
-                    <textarea name="checkin" id="checkin" cols="30" rows="10" placeholder="Nhập cảm xúc của bạn vào đây"></textarea>
+                    <div name="checkin" class="radio-container checkin">    
+                        <div class="status-container">
+                            <input type="radio" id="happy" name="checkin" value="happy">
+                            <label for="happy">😃 Vui, tràn đầy năng lượng cho một ngày mới!</label>
+                        </div>
+                        
+                        <div class="status-container">
+                            <input type="radio" id="normal" name="checkin" value="normal">
+                            <label for="normal">😐 Bình thường thôi.</label>
+                        </div>
+                        
+                        <div class="status-container">
+                            <input type="radio" id="sad" name="checkin" value="sad">
+                            <label for="sad">😢 Còn buồn bã vì những chuyện tồi tệ đã xảy ra.</label>
+                        </div>
+
+                        <div class="status-container">
+                            <input type="radio" id="angry" name="checkin" value="angry">
+                            <label for="angry">😡 Tức giận với những điều còn phiền lòng.</label>
+                        </div>
+                    </div>
                 </div>
 
                 <button href="/checkin-save" class="save-btn checkin-save-btn">Lưu</button>
@@ -64,7 +84,27 @@
                 </div>
                 <div class="practice_step_content_item_content">
                     <label for="checkout">Cảm xúc của bạn sau khi kết thúc ngày hôm nay như thế nào.</label>
-                    <textarea name="checkout" id="checkout" cols="30" rows="10" placeholder="Nhập cảm xúc của bạn vào đây"></textarea>
+                    <div name="checkout" class="radio-container checkout">    
+                        <div class="status-container">
+                            <input type="radio" id="happy" name="checkin" value="happy">
+                            <label for="happy">😃 Vui, tràn đầy năng lượng cho một ngày mới!</label>
+                        </div>
+                        
+                        <div class="status-container">
+                            <input type="radio" id="normal" name="checkin" value="normal">
+                            <label for="normal">😐 Bình thường thôi.</label>
+                        </div>
+                        
+                        <div class="status-container">
+                            <input type="radio" id="sad" name="checkin" value="sad">
+                            <label for="sad">😢 Còn buồn bã vì những chuyện tồi tệ đã xảy ra.</label>
+                        </div>
+
+                        <div class="status-container">
+                            <input type="radio" id="angry" name="checkin" value="angry">
+                            <label for="angry">😡 Tức giận với những điều còn phiền lòng.</label>
+                        </div>
+                    </div>
                 </div>
 
                 <button href="/checkout-save" class="save-btn checkout-save-btn">Lưu</button>
