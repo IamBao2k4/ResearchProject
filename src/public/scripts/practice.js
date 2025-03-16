@@ -51,30 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 content.style.display = "none";
             }
-
-            // Show video list when step_2 is clicked
-            if (step.classList.contains('step_2')) {
-                showMiniVideoList(videos);
-            }
-            
             // Auto proceed after 5 seconds for step 3
             if (step.classList.contains('step_3') && !stepStatus.step3) {
                 startStep3Timer();
             }
         });
     });
-
-    // // Thay đổi nội dung của player div thành button
-    // const playerDiv = document.getElementById('player');
-    // playerDiv.innerHTML = `
-    //     <button class="video-btn">Xem video hướng dẫn thiền định</button>
-    // `;
-
-    // // Xử lý sự kiện click button
-    // const videoBtn = playerDiv.querySelector('.video-btn');
-    // videoBtn.addEventListener('click', () => {
-    //     showVideoModal('inpok4MKVLM');
-    // });
 
     handleDisableSaveButton();
     checkinSaveBtn.addEventListener("click", async () => {
@@ -222,7 +204,6 @@ function showMiniVideoList(videos) {
                     </div>
                 `).join('')}
             </div>
-            <button class="close-modal">&times;</button>
         </div>
     `;
 
@@ -239,13 +220,6 @@ function showMiniVideoList(videos) {
             modal.classList.remove('show');
             setTimeout(() => modal.remove(), 300);
         });
-    });
-
-    // Handle close modal
-    const closeBtn = modal.querySelector('.close-modal');
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('show');
-        setTimeout(() => modal.remove(), 300);
     });
 
     modal.addEventListener('click', (e) => {
