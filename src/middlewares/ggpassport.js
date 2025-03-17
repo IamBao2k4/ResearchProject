@@ -15,7 +15,9 @@ function initializeGG(passport) {
                 user = await Users.create({
                     googleId: profile.id,
                     email: profile.emails[0].value,
-                    name: profile.displayName
+                    name: profile.displayName,
+                    watchedVideos: [1],
+                    finishedSteps: [1]
                 });
             }
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });

@@ -22,8 +22,8 @@ const Users = new Schema(
         isBanned: { type: Boolean, default: false },
         lastSurveyScore: Number,
         surveyDate: Date,
-        watchedVideos: [{ type: Number, default: 1 }],
-        finishedSteps: [{ type: Number, default: 1 }],
+        watchedVideos: [{ type: Number, default: [1], required: true }],
+        finishedSteps: [{ type: Number, default: [1], required: true }],
     },
     {
         timestamps: true,

@@ -62,8 +62,6 @@ form.addEventListener("submit", async (e) => {
             password: passwordInput.value,
         };
 
-        alert("Please check your email to verify your account.");
-
         try {
             const res = await fetch("/register", {
                 method: "POST",

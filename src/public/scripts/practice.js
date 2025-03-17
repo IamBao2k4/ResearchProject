@@ -27,10 +27,11 @@ const videos = [
 
 document.addEventListener("DOMContentLoaded", async () => {
     const stepTitles = document.querySelectorAll(".practice_step_title");
-    const practiceSteps = document.querySelectorAll(".practice_step");
     
     // Ẩn tất cả các bước ngoại trừ bước 1 khi trang được tải
     initSteps();
+
+    showMiniVideoList(videos);
 
     stepTitles.forEach((title) => {
         title.addEventListener("click", (event) => {
@@ -130,11 +131,6 @@ function completeStep(stepNumber) {
             
             // Hiển thị nội dung bước tiếp theo
             nextStepContent.style.display = "block";
-            
-            // Nếu là bước 2, hiển thị danh sách video
-            if (stepNumber + 1 === 2) {
-                showMiniVideoList(videos);
-            }
             
             // Nếu là bước 3, bắt đầu đếm ngược
             if (stepNumber + 1 === 3) {
@@ -244,11 +240,6 @@ function completeStep(stepNumber) {
             
             // Hiển thị nội dung bước tiếp theo
             nextStepContent.style.display = "block";
-            
-            // Nếu là bước 2, hiển thị danh sách video
-            if (stepNumber + 1 === 2) {
-                showMiniVideoList(videos);
-            }
             
             // Nếu là bước 3, bắt đầu đếm ngược
             if (stepNumber + 1 === 3) {
@@ -528,7 +519,8 @@ async function handleSaveStatus(status) {
             })
             .then((response) => response.json())
             .then(() => {
-                window.location.reload();
+                checkIfUserCheckedIn();
+                checkIfUserCheckedOut();
             })
             
         })
@@ -662,7 +654,6 @@ function showCongratulations() {
             modal.remove();
             fireworksContainer.remove();
         }, 300);
-        window.location.reload();
     };
 
     // Xử lý các nút

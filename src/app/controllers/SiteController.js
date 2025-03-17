@@ -218,13 +218,12 @@ class SiteController{
             const user = new Users({
                 ...req.body,
                 password: hashedPassword,
-                verified: false,
+                watchedVideos: [1],
+                finishedSteps: [1],
+                verified: true,
             });
 
             await user.save();
-
-            // Gửi email xác minh
-            sendVerificationEmail(user);
 
             res.status(200).json({
                 success: true,
@@ -260,15 +259,6 @@ class SiteController{
 
                     const { expiresAt } = result[0];
                     const hashedUniqueString = result[0].uniqueString;
-
-                    console.log(userId);
-                    console.log(uniqueString);
-
-                    console.log(hashedUniqueString);
-
-                    console.log(
-                        bcrypt.compare(uniqueString, hashedUniqueString)
-                    );
 
                     // checking for expired unique string
                     if (expiresAt < Date.now()) {
