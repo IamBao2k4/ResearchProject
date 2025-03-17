@@ -525,6 +525,29 @@ async function handleSaveStatus(status) {
             
         })
         .catch((error) => console.error(error));
+
+    if(status === "checkout"){
+        const checkoutStatus = selectedRadio.id;
+        let alertString = "";
+        switch(checkoutStatus){
+            case "happy": 
+                alertString = "✨Tuyệt vời! Hãy lưu giữ khoảnh khắc vui vẻ này và tiếp tục lan tỏa năng lượng tích cực nhé! Chúc bạn có thêm nhiều ngày tuyệt vời như hôm nay! ";
+                break;
+            case "normal":
+                alertString = "🌿 Không sao cả, có những ngày chỉ đơn giản là trôi qua. Hãy tự thưởng cho mình một điều gì đó nhỏ bé nhưng ý nghĩa, có thể ngày mai sẽ thú vị hơn đấy! ";
+                break;
+            case "sad":
+                alertString = "🤗 Không sao đâu, khóc cũng là một cách để giải tỏa cảm xúc. Bạn không hề yếu đuối, bạn chỉ đang đối diện với chính mình một cách chân thật. Hãy để bản thân được nghỉ ngơi, và nhớ rằng ngày mai là một cơ hội mới để bắt đầu lại!";
+                break;
+            case "angry":
+                alertString = "🌸 Hôm nay có thể không như mong muốn, nhưng bạn đã cố gắng hết sức rồi. Đừng để cơn giận giữ mãi trong lòng, hãy thử nghe một bản nhạc nhẹ hoặc viết ra suy nghĩ của mình để giải tỏa nhé. Ngày mai sẽ tốt hơn!";
+                break;
+            default:
+                alertString = "Chúc mừng bạn đã hoàn thành ngày hôm nay!";
+        }
+
+        alert(alertString);
+    }
 }
 
 function setDisabledSaveButton(btn) {
