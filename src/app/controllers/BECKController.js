@@ -82,7 +82,7 @@ class beck_answerController {
 
     async getQuestions(req, res) {
         try {
-            const questions = await beck_question.find().sort({ question: "asc" }).limit(1);
+            const questions = await beck_question.find().sort({ question: "asc" }).limit(21);
             return res.status(200).json(questions);
         } catch (error) {
             return res.status(500).json({ message: error.message });
