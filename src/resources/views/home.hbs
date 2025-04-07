@@ -8,14 +8,14 @@
             và liệu pháp tâm lý hiện đại, chúng tôi sẽ giúp bạn xây dựng một cuộc sống cân bằng và hạnh phúc hơn.
         </p>
         {{#if user}}
-            {{#isToday user.surveyDate}}
+            {{#isLessThan3Days user.surveyDate}}
                 <div class="survey-buttons">
-                    <a href="/survey" class="explore-btn">Khảo sát</a>
+                    {{!-- <a href="/survey" class="explore-btn">Khảo sát</a> --}}
                     <a href="/practice/{{user.lastSurveyScore}}" class="continue-btn">Tiếp tục xem video</a>
                 </div>
             {{else}}
                 <a href="/survey" class="explore-btn">Khảo sát</a>
-            {{/isToday}}
+            {{/isLessThan3Days}}
         {{else}}
             <a href="/login" class="explore-btn" id="survey-login-btn">Khảo sát</a>
         {{/if}}
