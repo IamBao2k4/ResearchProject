@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const beck_question = new Schema({
     question: { type: Number, required: true },
+<<<<<<< HEAD
+=======
+    text: { type: String, required: true }
+>>>>>>> origin/fix_practice_logic
 });
 
 module.exports = mongoose.model("beck_questions", beck_question);

@@ -1,0 +1,64 @@
+$primary-color: #007bff;
+$secondary-color: #ffffff;
+$success-color: #28a745;
+$background-color: #f8f9fa;
+
+* {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    font-size: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  input {
+    border: none;
+  }
+  
+  button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  select {
+    border: none;
+  }
+  
+@import "login";
+@import "register";
+@import "forgotPassword";
+@import "header";
+@import "footer";
+@import "home";
+@import "survey";
+@import "practice";
+@import "profile";
+@import "diaryStatus";
+
+main{
+  margin-top: 85px;
+}
+
+.hidden {
+  display: none;
+}

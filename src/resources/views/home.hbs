@@ -1,0 +1,161 @@
+<div class="header-backdrop"></div>
+<main id="home">
+    <div class="hero-section">
+        <h1 class="hero-title">Hỗ trợ Sức khỏe Tinh thần</h1>
+        <p class="hero-description">
+            Chúng tôi cung cấp phương pháp hỗ trợ cân bằng cảm xúc và công cụ chuyên nghiệp để hỗ trợ sức khỏe tinh thần của bạn, luôn đồng hành cùng bạn trên hành trình 
+            phát triển bản thân và cải thiện sức khỏe tinh thần. Thông qua các phương pháp đánh giá khoa học 
+            và liệu pháp tâm lý hiện đại, chúng tôi sẽ giúp bạn xây dựng một cuộc sống cân bằng và hạnh phúc hơn.
+        </p>
+        {{#if user}}
+            {{#isLessThan3Days user.surveyDate}}
+                <div class="survey-buttons">
+                    {{!-- <a href="/survey" class="explore-btn">Khảo sát</a> --}}
+                    <a href="/practice/{{user.lastSurveyScore}}" class="continue-btn">Tiếp tục xem video</a>
+                </div>
+            {{else}}
+                <a href="/survey" class="explore-btn">Khảo sát</a>
+            {{/isLessThan3Days}}
+        {{else}}
+            <a href="/login" class="explore-btn" id="survey-login-btn">Khảo sát</a>
+        {{/if}}
+    </div>
+
+    <div class="showcase-section">
+        <div class="main-showcase">
+            <img src="/img/stress.svg" alt="Modern Architecture" class="showcase-img">
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-item">
+                <img src="/img/anh_cuoi.png.svg" alt="Geometric Patterns" class="grid-img">
+            </div>
+            <div class="showcase-item">
+                <img src="/img/anh2.png.svg" alt="Spiral Structure" class="grid-img">
+            </div>
+            <div class="showcase-item">
+                <img src="/img/anh3.png.svg" alt="Wave Patterns" class="grid-img">
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="home-body">
+        <div class="services-section">
+            <h2 class="section-title">Dịch vụ của chúng tôi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Đánh giá tâm lý</h3>
+                    <p>Dùng thang đo Beck để kiểm tra nhanh mức độ stress của bạn.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Tư vấn chuyên sâu</h3>
+                    <p>Ứng dụng chúng tôi luôn sẵn sàng cùng bạn thực hành.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Liệu pháp nhóm</h3>
+                    <p>kết nối đến các chuyên gia nếu bạn cần.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="why-choose-section">
+            <h2 class="section-title">Tại sao chọn chúng tôi?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="benefit-number">01</span>
+                    <h3>Chuyên môn</h3>
+                    <p>Nhóm nghiên cứu đã nghiên cứu ra liệu pháp thiền định hỗ trợ.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-number">02</span>
+                    <h3>Bảo mật thông tin</h3>
+                    <p>Cam kết bảo mật tuyệt đối thông tin cá nhân và nội dung tư vấn của khách hàng.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-number">03</span>
+                    <h3>Linh hoạt thời gian</h3>
+                    <p>Dịch vụ tư vấn trực tuyến 24/7, giúp bạn dễ dàng tiếp cận sự hỗ trợ bất cứ khi nào cần.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-number">04</span>
+                    <h3>Đồng hành lâu dài</h3>
+                    <p>Bất cứ khi nào bạn gặp vấn đề về sức khoẻ tinh thần, chúng tôi sẽ luôn đồng hành cùng bạn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <div class="team-container">
+            <h3 class="team-title">Thành viên nhóm</h3>
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-image-link">
+                        <img src="/img/tram.svg" alt="Thịnh" class="team-member-img">
+                    </div>
+                    <h2 class="team-member-name">Thịnh</h2>
+                    <h3 class="team-member-position">Leader</h3>
+                </div>
+                <div class="team-member">
+                    <div class="member-image-link">
+                        <img src="/img/dang.svg" alt="Lê Hải Đăng" class="team-member-img">
+                    </div>
+                    <h2 class="team-member-name">Hải Đăng</h2>
+                    <h3 class="team-member-position">Developer</h3>
+                </div>
+                <div class="team-member">
+                    <div class="member-image-link">
+                        <img src="/img/bao.svg" alt="Trần Minh Gia Bảo" class="team-member-img">
+                    </div>
+                    <h2 class="team-member-name">Gia Bảo</h2>
+                    <h3 class="team-member-position">Developer</h3>
+                </div>
+                <div class="team-member">
+                    <div class="member-image-link">
+                        <img src="/img/thinh.svg" alt="TAS" class="team-member-img">
+                    </div>
+                    <h2 class="team-member-name">TAS</h2>
+                    <h3 class="team-member-position">Social worker</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div id="contact" class="contact-container">
+            <h3 class="team-title">Liên hệ</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+
+                    <i class="fas fa-phone"></i>
+                    <span>0329335697</span>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>tongthinh14@gmail.com</span>
+                </div>
+              
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Phường 1, quận Bình Thạnh, TP. Hồ Chí Minh</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Thứ 2 - Chủ nhật</span>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    
+   
+</main>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
