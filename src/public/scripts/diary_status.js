@@ -14,19 +14,8 @@ document.addEventListener('DOMContentLoaded',async function () {
 
     // Initialize page positions
     function initPages() {
-        // Debug: Kiểm tra số lượng trang và trạng thái
-        console.log(`Tổng số trang: ${pages.length}`);
-        console.log(`Trang bìa: ${frontCover.id}`);
-        
-        if (pages.length > 1) {
-            console.log(`Trang thứ 2 có ID: ${pages[1].className}`);
-        }
-        
         // Set all pages to initial position (behind cover)
-        pages.forEach((page, index) => {
-            // Log thông tin về mỗi trang
-            console.log(`Trang ${index}: ${page.className}`);
-            
+        pages.forEach((page, index) => {            
             // Chuẩn bị tất cả các trang từ đầu
             page.style.transform = 'rotateY(0deg)';
             page.style.zIndex = totalPages - index;
@@ -101,9 +90,6 @@ document.addEventListener('DOMContentLoaded',async function () {
                     }, 700);
                 }
             } else {
-                // Lật trang từ trang hiện tại về trang trước đó
-                console.log(`Quay về từ trang: ${currentPage} sang trang: ${currentPage - 1}`);
-                
                 // Thêm class turning cho hiệu ứng
                 pages[currentPage - 1].classList.add('turning');
                 
@@ -210,9 +196,6 @@ document.addEventListener('DOMContentLoaded',async function () {
                 
                 // Chuẩn bị trang tiếp theo (sẽ hiển thị)
                 if (currentPage < totalPages) {
-                    // Log để debug
-                    console.log(`Chuẩn bị hiển thị trang: ${currentPage + 1}`);
-                    
                     // Xóa bỏ class ẩn
                     pages[currentPage].classList.remove('page-hidden');
                     // Ẩn trang tiếp theo chờ trang hiện tại lật qua
@@ -243,9 +226,6 @@ document.addEventListener('DOMContentLoaded',async function () {
                             
                             // Tăng trang hiện tại và hoàn tất animation
                             currentPage++;
-                            
-                            // Log để debug
-                            console.log(`Đã chuyển đến trang: ${currentPage}`);
                             
                             // Đợi animation hoàn thành
                             setTimeout(() => {
@@ -325,55 +305,64 @@ document.addEventListener('DOMContentLoaded',async function () {
         const checkinStatus = await loadCheckinStatus();
         const checkoutStatus = await loadCheckoutStatus();
         const book = document.querySelector('.book');
-
-        console.log(`Số ngày lấy được: ${dates.length}`);
-
+    
         // Xóa hết các trang đã tồn tại (nếu có)
         const existingPages = book.querySelectorAll('.page:not(#front-cover)');
         existingPages.forEach(page => page.remove());
-
-        for (let i = 0; i < dates.length; i++) {
-            let date = dates[i];
-            console.log(`Tạo trang ${i+1} cho ngày: ${date}`);
-            
-            let checkin = checkinStatus.find(status => new Date(status.date).toISOString().split("T")[0] === date);
-            let checkout = checkoutStatus.find(status => new Date(status.date).toISOString().split("T")[0] === date);
-
-            // Chuyển đổi định dạng ngày từ YYYY-MM-DD thành DD-MM-YYYY
-            let formattedDate = '';
-            if (date) {
-                const dateParts = date.split('-');
-                if (dateParts.length === 3) {
-                    formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-                } else {
-                    formattedDate = date; // Giữ nguyên nếu không đúng định dạng
+    
+        for (let i = 0; i < dates.length; i += 3) {
+            // Group 3 days into one page
+            let pageContent = '';
+            for (let j = 0; j < 3; j++) {
+                const dateIndex = i + j;
+                if (dateIndex >= dates.length) break;
+    
+                let date = dates[dateIndex];
+    
+                let checkin = checkinStatus.find(status => new Date(status.date).toISOString().split("T")[0] === date);
+                let checkout = checkoutStatus.find(status => new Date(status.date).toISOString().split("T")[0] === date);
+    
+                // Chuyển đổi định dạng ngày từ YYYY-MM-DD thành DD-MM-YYYY
+                let formattedDate = '';
+                if (date) {
+                    const dateParts = date.split('-');
+                    if (dateParts.length === 3) {
+                        formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+                    } else {
+                        formattedDate = date; // Giữ nguyên nếu không đúng định dạng
+                    }
                 }
+    
+                pageContent += `
+                    <div class="diary-entry">
+                        <div class="diary-date">${formattedDate}</div>
+                        <h2 class="diary-title">Cảm xúc thường ngày.</h2>
+                        <div class="diary-content">
+                            <p>Cảm xúc đầu ngày: </p>
+                            <p>${checkin?.status || "Bạn chưa checkin cảm xúc đầu ngày!"}</p>
+                            <p>Cảm xúc cuối ngày: </p>
+                            <p>${checkout?.status || "Bạn chưa checkout cảm xúc cuối ngày!"}</p>
+                        </div>
+                    </div>
+                `;
             }
-
+    
             let page = document.createElement('div');
             page.classList.add('page');
-            const pageClass = 'page'+(i+1); 
+            const pageClass = 'page' + (Math.floor(i / 3) + 1);
             page.classList.add(pageClass);
-            page.id = `page${i+1}`;  // Thêm ID để dễ debug
+            page.id = `page${Math.floor(i / 3) + 1}`; // Thêm ID để dễ debug
             page.innerHTML = `
                 <div class="page-content">
-                    <div class="diary-date">${formattedDate}</div>
-                    <h2 class="diary-title">Cảm xúc thường ngày.</h2>
-                    <div class="diary-content">
-                        <p>Cảm xúc đầu ngày: </p>
-                        <p>${checkin?.status || "Bạn chưa checkin cảm xúc đầu ngày!"}</p>
-                        <p>Cảm xúc cuối ngày: </p>
-                        <p>${checkout?.status || "Bạn chưa checkout cảm xúc cuối ngày!"}</p>
-                    </div>
-                    <div class="page-number">${i + 1}</div>
+                    ${pageContent}
+                    <div class="page-number">${Math.floor(i / 3) + 1}</div>
                     <div class="page-curl"></div>
                 </div>
             `;
-
+    
             book.appendChild(page);
-            console.log(`Đã thêm trang ${i+1} vào sách`);
         }
-
+    
         const backCover = document.createElement('div');
         backCover.classList.add('page');
         backCover.id = 'back-cover';
@@ -383,15 +372,9 @@ document.addEventListener('DOMContentLoaded',async function () {
                 <p>"The diary is an exercise in freedom—a space to process, reflect, and dream."</p>
             </div>
         `;
-
+    
         book.appendChild(backCover);
         pages = document.querySelectorAll('.page');
         totalPages = pages.length - 1;
-        
-        console.log(`Đã tải xong ${pages.length} trang, bao gồm cả bìa sau.`);
-        console.log('Danh sách các trang:');
-        pages.forEach((page, index) => {
-            console.log(`- Trang ${index}: ${page.id || page.className}`);
-        });
     }
 });
