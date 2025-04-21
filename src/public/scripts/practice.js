@@ -556,6 +556,8 @@ async function handleSaveStatus(status) {
             case "angry":
                 alertString = "🌸 Hôm nay có thể không như mong muốn, nhưng bạn đã cố gắng hết sức rồi. Đừng để cơn giận giữ mãi trong lòng, hãy thử nghe một bản nhạc nhẹ hoặc viết ra suy nghĩ của mình để giải tỏa nhé. Ngày mai sẽ tốt hơn!";
                 break;
+            case "worry":
+                alertString = "💙 Mọi chuyện rồi sẽ ổn thôi. Đừng quên rằng bạn không cần phải giải quyết tất cả mọi thứ trong một ngày. Hãy thử hít thở sâu, viết ra những điều khiến bạn lo lắng và cho bản thân một chút thời gian để thư giãn nhé!";
             default:
                 alertString = "Chúc mừng bạn đã hoàn thành ngày hôm nay!";
         }
