@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Đánh dấu bước 4 đã hoàn thành
         completeStep(4);
         // Hiển thị thông báo chúc mừng
-        showCongratulations();
+        showCongratulations("Bạn đã hoàn thành bài tập thiền định. Hãy tiếp tục duy trì thói quen này nhé!");
     });
 
     checkIfUserCheckedIn();
@@ -355,6 +355,10 @@ function showVideoModal(videoId) {
     const modal = document.createElement('div');
     modal.className = 'video-modal';
     modal.innerHTML = `
+        <div class="video-modal-header">
+            <h2>Video Hướng dẫn thiền định</h2>
+            <button class="video-modal-close">X</button>
+        </div>
         <div class="video-modal-content">
             <div class="video-container">
                 <iframe 
@@ -383,6 +387,16 @@ function showVideoModal(videoId) {
     } else {
         onYouTubeIframeAPIReady(videoId);
     }
+
+    const closeButton = modal.querySelector('.video-modal-close');
+    closeButton.addEventListener('click', () => {
+        modal.classList.remove('show');
+        showMiniVideoList(videos);
+        setTimeout(() => modal.remove(), 300);
+        if (player) {
+            player.stopVideo();
+        }
+    });
 
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
@@ -591,10 +605,16 @@ function onYouTubeIframeAPIReady() {
                 videoWatched = true;
             }
         }
+
+        // Khi hoàn thành video thì chúc mừng
+        if (event.data === YT.PlayerState.ENDED) {
+            videoWatched = true;
+            showCongratulations("Chúc mừng bạn đã hoàn thành video, hãy tiếp tục với các bước tiếp theo nhé!");
+        }
     }
 }
 
-function showCongratulations() {
+function showCongratulations(congratulations) {
     // Tạo overlay
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
@@ -652,7 +672,7 @@ function showCongratulations() {
                 <div class="sparkles"></div>
                 <h3 class="modal-title">🎉 Chúc mừng bạn! 🎉</h3>
             </div>
-            <p class="modal-message">Bạn đã hoàn thành bài tập thiền định. Hãy tiếp tục duy trì thói quen này nhé!</p>
+            <p class="modal-message">${congratulations}</p>
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-continue">Tiếp tục</button>
             </div>
