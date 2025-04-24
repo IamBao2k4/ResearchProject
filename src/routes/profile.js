@@ -40,4 +40,8 @@ router.get('/get-watched-videos',
     siteController.checkAuthenticated,
     profileController.getWatchedVideos);
 
+router.post('/reset-watched-videos',
+    siteController.checkAuthenticated,
+    profileController.resetWatchedVideos);
+
 module.exports = router;

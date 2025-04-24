@@ -13,16 +13,11 @@ const stepStatus = {
 let videoWatched = false;
 
 const videos = [
-    { id: 'inpok4MKVLM', title: 'Video 1', index: 1 },
-    { id: 'dQw4w9WgXcQ', title: 'Video 2', index: 2 },
-    { id: '3JZ_D3ELwOQ', title: 'Video 3', index: 3 },
-    { id: 'L_jWHffIx5E', title: 'Video 4', index: 4 },
-    { id: 'eVTXPUF4Oz4', title: 'Video 5', index: 5 },
-    { id: 'hTWKbfoikeg', title: 'Video 6', index: 6 },
-    { id: 'kXYiU_JCYtU', title: 'Video 7', index: 7 },
-    { id: 'ktvTqknDobU', title: 'Video 8', index: 8 },
-    { id: 'y6120QOlsfU', title: 'Video 9', index: 9 },
-    { id: 'CevxZvSJLk8', title: 'Video 10', index: 10 },
+    { id: 'E8u0MR-JN9I', title: 'Video 1', index: 1 },
+    { id: 'PLkxdpKPnMM', title: 'Video 2', index: 2 },
+    { id: 'P2VnVXlFMmQ', title: 'Video 3', index: 3 },
+    { id: '6Y0AKIq9ZLg', title: 'Video 4', index: 4 },
+    { id: '_4578LUGgDE', title: 'Video 5', index: 5 },
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -610,7 +605,13 @@ function onYouTubeIframeAPIReady() {
 
         // Khi hoàn thành video thì chúc mừng
         if (event.data === YT.PlayerState.ENDED) {
-            videoWatched = true;
+            const endTime = new Date().getTime();
+            watchDuration += (endTime - watchStartTime) / 1000;
+            
+            // Đánh dấu đã xem nếu đã xem hơn 10 giây
+            if (watchDuration >= 10) {
+                videoWatched = true;
+            }
             showCongratulations("Chúc mừng bạn đã hoàn thành video, hãy tiếp tục với các bước tiếp theo nhé!");
         }
     }

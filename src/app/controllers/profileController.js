@@ -206,6 +206,18 @@ class ProfileController {
             res.status(500).json({ error: "Internal Server Error" });
         }
     }
+
+    // [POST] /profile/reset-watched-videos
+    async resetWatchedVideos(req, res) {
+        try {
+            const userId = req.user.id;
+            await Users.findByIdAndUpdate(userId, { watchedVideos: [1] }, { new: true });
+            res.status(200).json({ message: "Watched videos reset successfully" });
+        } catch (error) {
+            console.error("Error resetting watched videos:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
 }
 
 module.exports = new ProfileController();

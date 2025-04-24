@@ -105,6 +105,14 @@ form.addEventListener("submit", async (e) => {
         });
 
         if (res.ok) {
+
+            await fetch("/profile/reset-watched-videos",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
             if(score < 14) {
                 showModal(
                     "Kết quả đánh giá",
