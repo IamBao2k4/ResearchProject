@@ -22,7 +22,7 @@ const videos = [
 
 document.addEventListener("DOMContentLoaded", async () => {
     const stepTitles = document.querySelectorAll(".practice_step_title");
-    
+
     // Ẩn tất cả các bước ngoại trừ bước 1 khi trang được tải
     initSteps();
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const content = title.nextElementSibling;
             const step = title.closest('.practice_step');
             const stepNumber = getStepNumber(step);
-            
+
             // Chỉ cho phép mở bước hiện tại hoặc các bước đã hoàn thành
             if (!canAccessStep(stepNumber)) {
                 event.preventDefault();
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Khởi tạo các bước
 function initSteps() {
     const practiceSteps = document.querySelectorAll(".practice_step");
-    
+
     // Hiển thị chỉ bước 1, ẩn các bước khác
     practiceSteps.forEach((step, index) => {
         const content = step.querySelector(".practice_step_content");
@@ -101,7 +101,7 @@ function getStepNumber(stepElement) {
 // Kiểm tra xem người dùng có thể truy cập bước này chưa
 function canAccessStep(stepNumber) {
     if (stepNumber === 1) return true;
-    
+
     // Nếu bước trước đó đã hoàn thành, cho phép truy cập bước này
     return stepStatus[`step${stepNumber - 1}`];
 }
@@ -109,24 +109,24 @@ function canAccessStep(stepNumber) {
 // Đánh dấu bước đã hoàn thành và mở bước tiếp theo
 function completeStep(stepNumber) {
     stepStatus[`step${stepNumber}`] = true;
-    
+
     // Đánh dấu bước hiện tại đã hoàn thành bằng CSS
     const completedStep = document.querySelector(`.step_${stepNumber}`);
     completedStep.classList.add('completed');
-    
+
     // Nếu không phải bước cuối cùng, mở bước tiếp theo
     if (stepNumber < 4) {
         setTimeout(() => {
             const nextStep = document.querySelector(`.step_${stepNumber + 1}`);
             const nextStepTitle = nextStep.querySelector('.practice_step_title');
             const nextStepContent = nextStep.querySelector('.practice_step_content');
-            
+
             // Cuộn tới bước tiếp theo
             nextStep.scrollIntoView({ behavior: 'smooth' });
-            
+
             // Hiển thị nội dung bước tiếp theo
             nextStepContent.style.display = "block";
-            
+
             // Nếu là bước 3, bắt đầu đếm ngược
             if (stepNumber + 1 === 3) {
                 startStep3Timer();
@@ -138,24 +138,24 @@ function completeStep(stepNumber) {
 // Bắt đầu đếm ngược cho bước 3
 function startStep3Timer() {
     if (stepStatus.step3) return; // Nếu đã hoàn thành thì không làm gì
-    
+
     let timeLeft = 5;
     const timerElement = document.createElement('div');
     timerElement.className = 'step-timer';
     timerElement.innerHTML = `Tự động chuyển sang bước tiếp theo sau <span>${timeLeft}</span> giây...`;
-    
+
     const step3 = document.querySelector('.step_3');
     const step3Content = step3.querySelector('.practice_step_content');
     step3Content.appendChild(timerElement);
-    
+
     const interval = setInterval(() => {
         timeLeft--;
         timerElement.querySelector('span').textContent = timeLeft;
-        
+
         if (timeLeft <= 0) {
             clearInterval(interval);
             timerElement.remove();
-            
+
             // Đánh dấu bước 3 đã hoàn thành
             stepStatus.step3 = true;
             completeStep(3);
@@ -173,9 +173,9 @@ function showMessage(message) {
             <button class="message-close">OK</button>
         </div>
     `;
-    
+
     document.body.appendChild(messageElement);
-    
+
     messageElement.querySelector('.message-close').addEventListener('click', () => {
         messageElement.remove();
     });
@@ -184,7 +184,7 @@ function showMessage(message) {
 // Khởi tạo các bước
 function initSteps() {
     const practiceSteps = document.querySelectorAll(".practice_step");
-    
+
     // Hiển thị chỉ bước 1, ẩn các bước khác
     practiceSteps.forEach((step, index) => {
         const content = step.querySelector(".practice_step_content");
@@ -210,7 +210,7 @@ function getStepNumber(stepElement) {
 // Kiểm tra xem người dùng có thể truy cập bước này chưa
 function canAccessStep(stepNumber) {
     if (stepNumber === 1) return true;
-    
+
     // Nếu bước trước đó đã hoàn thành, cho phép truy cập bước này
     return stepStatus[`step${stepNumber - 1}`];
 }
@@ -218,24 +218,24 @@ function canAccessStep(stepNumber) {
 // Đánh dấu bước đã hoàn thành và mở bước tiếp theo
 function completeStep(stepNumber) {
     stepStatus[`step${stepNumber}`] = true;
-    
+
     // Đánh dấu bước hiện tại đã hoàn thành bằng CSS
     const completedStep = document.querySelector(`.step_${stepNumber}`);
     completedStep.classList.add('completed');
-    
+
     // Nếu không phải bước cuối cùng, mở bước tiếp theo
     if (stepNumber < 4) {
         setTimeout(() => {
             const nextStep = document.querySelector(`.step_${stepNumber + 1}`);
             const nextStepTitle = nextStep.querySelector('.practice_step_title');
             const nextStepContent = nextStep.querySelector('.practice_step_content');
-            
+
             // Cuộn tới bước tiếp theo
             nextStep.scrollIntoView({ behavior: 'smooth' });
-            
+
             // Hiển thị nội dung bước tiếp theo
             nextStepContent.style.display = "block";
-            
+
             // Nếu là bước 3, bắt đầu đếm ngược
             if (stepNumber + 1 === 3) {
                 startStep3Timer();
@@ -247,24 +247,24 @@ function completeStep(stepNumber) {
 // Bắt đầu đếm ngược cho bước 3
 function startStep3Timer() {
     if (stepStatus.step3) return; // Nếu đã hoàn thành thì không làm gì
-    
+
     let timeLeft = 5;
     const timerElement = document.createElement('div');
     timerElement.className = 'step-timer';
     timerElement.innerHTML = `Tự động chuyển sang bước tiếp theo sau <span>${timeLeft}</span> giây...`;
-    
+
     const step3 = document.querySelector('.step_3');
     const step3Content = step3.querySelector('.practice_step_content');
     step3Content.appendChild(timerElement);
-    
+
     const interval = setInterval(() => {
         timeLeft--;
         timerElement.querySelector('span').textContent = timeLeft;
-        
+
         if (timeLeft <= 0) {
             clearInterval(interval);
             timerElement.remove();
-            
+
             // Đánh dấu bước 3 đã hoàn thành
             stepStatus.step3 = true;
             completeStep(3);
@@ -282,9 +282,9 @@ function showMessage(message) {
             <button class="message-close">OK</button>
         </div>
     `;
-    
+
     document.body.appendChild(messageElement);
-    
+
     messageElement.querySelector('.message-close').addEventListener('click', () => {
         messageElement.remove();
     });
@@ -322,14 +322,10 @@ async function showMiniVideoList(videos) {
             const videoId = item.getAttribute('data-video-id');
             const index = item.getAttribute('data-index');
 
-            console.log("watchedVideos", watchedVideos);
-            console.log("index", index);
-            console.log(watchedVideos)
-
-            if(watchedVideos >= index){
+            if (watchedVideos >= index) {
                 showVideoModal(videoId);
             }
-            else{
+            else {
                 alert(`Bạn cần xem video ${watchedVideos} trước để mở video này!`);
                 return;
             }
@@ -347,6 +343,13 @@ async function showMiniVideoList(videos) {
 }
 
 function showVideoModal(videoId) {
+    let video;
+    videos.forEach((v) => {
+        if (v.id === videoId) {
+            video = v;
+        }
+    });
+
     const modal = document.createElement('div');
     modal.className = 'video-modal';
     modal.innerHTML = `
@@ -385,6 +388,20 @@ function showVideoModal(videoId) {
 
     const closeButton = modal.querySelector('.video-modal-close');
     closeButton.addEventListener('click', () => {
+
+        const endTime = new Date().getTime();
+        watchDuration += (endTime - watchStartTime) / 1000;
+
+        // Đánh dấu đã xem nếu đã xem hơn 10 giây
+        if (watchDuration >= 10 && watchStartTime != 0) {
+            videoWatched = true;
+            if (videoWatched) {
+                updateWatchedVideos(video);
+            } else {
+                showMessage("Bạn cần xem video ít nhất 10 giây để hoàn thành bước này!");
+            }
+        }
+
         modal.classList.remove('show');
         showMiniVideoList(videos);
         setTimeout(() => modal.remove(), 300);
@@ -395,36 +412,36 @@ function showVideoModal(videoId) {
 
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
-            if (videoWatched) {
-                let video;
-                videos.forEach((v) => {
-                    if (v.id === videoId) {
-                        video = v;
-                    }
-                });
-                fetch("/profile/update-watched-videos", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        watchedVideos: video.index + 1,
-                    }),
-                })
-                .then((response) => response.json())
-                .then(() => {
-                    watchedVideos = video.index + 1;
-                });
-                completeStep(2);
+            if (videoWatched && watchDuration >= 10) {
+                updateWatchedVideos(video);
             } else {
                 showMessage("Bạn cần xem video ít nhất 10 giây để hoàn thành bước này!");
             }
-            
+
             showMiniVideoList(videos);
             modal.classList.remove('show');
             setTimeout(() => modal.remove(), 300);
         }
     });
+}
+
+function updateWatchedVideos(video){
+    fetch("/profile/update-watched-videos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            watchedVideos: video.index + 1,
+        }),
+    })
+        .then((response) => response.json())
+        .then(() => {
+            watchedVideos = video.index + 1;
+            watchStartTime = 0;
+            watchDuration = 0;
+        });
+    completeStep(2);
 }
 
 function checkIfUserCheckedIn() {
@@ -445,7 +462,7 @@ function checkIfUserCheckedIn() {
                 const label = checkin_radio_group.parentNode.querySelector("label");
                 label.innerHTML = "Bạn đã checkin trạng thái ngày hôm nay!";
                 setDisabledSaveButton(checkinSaveBtn);
-                
+
                 // Đánh dấu bước 1 đã hoàn thành
                 completeStep(1);
             }
@@ -471,7 +488,7 @@ function checkIfUserCheckedOut() {
                 const label = checkout_radio_group.parentNode.querySelector("label");
                 label.innerHTML = "Bạn đã checkout trạng thái ngày hôm nay!";
                 setDisabledSaveButton(checkoutSaveBtn);
-                
+
                 // Đánh dấu bước 4 đã hoàn thành
                 completeStep(4);
             }
@@ -481,7 +498,7 @@ function checkIfUserCheckedOut() {
 
 async function handleSaveStatus(status) {
     let radio_group = document.querySelectorAll(".radio-container")[0];
-    if(status === "checkout"){
+    if (status === "checkout") {
         radio_group = document.querySelectorAll(".radio-container")[1];
     }
 
@@ -526,20 +543,20 @@ async function handleSaveStatus(status) {
                     finishedSteps: status === "checkin" ? 2 : 4,
                 }),
             })
-            .then((response) => response.json())
-            .then(() => {
-                checkIfUserCheckedIn();
-                checkIfUserCheckedOut();
-            })
-            
+                .then((response) => response.json())
+                .then(() => {
+                    checkIfUserCheckedIn();
+                    checkIfUserCheckedOut();
+                })
+
         })
         .catch((error) => console.error(error));
 
-    if(status === "checkout"){
+    if (status === "checkout") {
         const checkoutStatus = selectedRadio.id;
         let alertString = "";
-        switch(checkoutStatus){
-            case "happy": 
+        switch (checkoutStatus) {
+            case "happy":
                 alertString = "✨Tuyệt vời! Hãy lưu giữ khoảnh khắc vui vẻ này và tiếp tục lan tỏa năng lượng tích cực nhé! Chúc bạn có thêm nhiều ngày tuyệt vời như hôm nay! ";
                 break;
             case "normal":
@@ -569,10 +586,12 @@ function setDisabledSaveButton(btn) {
 }
 
 let player;
+let watchStartTime = 0;
+let watchDuration = 0;
 
 function onYouTubeIframeAPIReady() {
     let player;
-    
+
     try {
         player = new YT.Player('youtube-player', {
             events: {
@@ -582,21 +601,18 @@ function onYouTubeIframeAPIReady() {
     } catch (error) {
         console.error("Error initializing YouTube player:", error);
     }
-    
-    let watchStartTime = 0;
-    let watchDuration = 0;
-    
+
     function onPlayerStateChange(event) {
         // Khi video bắt đầu phát
         if (event.data === YT.PlayerState.PLAYING) {
             watchStartTime = new Date().getTime();
         }
-        
+
         // Khi video dừng hoặc kết thúc
         if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
             const endTime = new Date().getTime();
             watchDuration += (endTime - watchStartTime) / 1000;
-            
+
             // Đánh dấu đã xem nếu đã xem hơn 10 giây
             if (watchDuration >= 10) {
                 videoWatched = true;
@@ -607,7 +623,7 @@ function onYouTubeIframeAPIReady() {
         if (event.data === YT.PlayerState.ENDED) {
             const endTime = new Date().getTime();
             watchDuration += (endTime - watchStartTime) / 1000;
-            
+
             // Đánh dấu đã xem nếu đã xem hơn 10 giây
             if (watchDuration >= 10) {
                 videoWatched = true;
@@ -681,9 +697,9 @@ function showCongratulations(congratulations) {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
-    
+
     // Hiển thị overlay và modal
     requestAnimationFrame(() => {
         overlay.classList.add('show');
@@ -704,7 +720,7 @@ function showCongratulations(congratulations) {
 
     // Xử lý các nút
     const continueBtn = modal.querySelector('.modal-btn-continue');
-    
+
     continueBtn.addEventListener('click', () => {
         // Lưu trạng thái vào localStorage
         localStorage.setItem('hideVideoButton', 'true');
@@ -716,7 +732,7 @@ function showCongratulations(congratulations) {
 }
 
 // Thêm CSS cho thông báo và bộ đếm thời gian
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const style = document.createElement('style');
     style.textContent = `
         .message-overlay {

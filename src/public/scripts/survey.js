@@ -140,7 +140,7 @@ form.addEventListener("submit", async (e) => {
             } else {
                 showModal(
                     "Kết quả đánh giá",
-                    `Điểm số của bạn là ${score} (${score >= 14 && score <= 19 ? "nằm trong khoảng từ 14 đến 19 điểm" : "nằm trong khoảng từ 20 đến 29 điểm"}) vì vậy bạn có biểu hiện trầm cảm ${score >= 14 && score <= 19 ? "nhẹ" : "trung bình"}. Bạn có muốn thực hành phương pháp giảm căng thẳng không?`,
+                    `Điểm số của bạn là ${score} (${score >= 14 && score <= 19 ? "nằm trong khoảng từ 14 đến 19 điểm" : "nằm trong khoảng từ 20 đến 29 điểm"}) vì vậy bạn có biểu hiện stress ${score >= 14 && score <= 19 ? "nhẹ" : "trung bình"}. Bạn có muốn thực hành phương pháp giảm căng thẳng không?`,
                     () => {
                         window.location.href = `/practice/${score}`;
                     }
