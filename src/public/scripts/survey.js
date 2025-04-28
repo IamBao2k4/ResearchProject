@@ -1,7 +1,11 @@
 const playMusic = document.getElementById("play-music");
 playMusic.addEventListener("click", () => {
     const audio = document.getElementById("background-audio");
-    audio.play();
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
 });
 
 async function getBECK() {
