@@ -1,3 +1,9 @@
+const playMusic = document.getElementById("play-music");
+playMusic.addEventListener("click", () => {
+    const audio = document.getElementById("background-audio");
+    audio.play();
+});
+
 async function getBECK() {
     const response = await fetch("/api/beck_question");
     const data = await response.json();
