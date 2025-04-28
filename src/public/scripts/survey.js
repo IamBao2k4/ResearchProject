@@ -36,7 +36,6 @@ async function generateAnswers() {
         answerElement.classList.add("answers");
 
         const answers = await getAnswerByQuestionId(question._id);
-        console.log("Answers for question", i + 1, ":", answers);
 
         for (let index = 0; index < answers.length; index++) {
             const answer = answers[index];
@@ -178,9 +177,6 @@ function updateProgress() {
         const progress = (answeredQuestions / totalQuestions) * 100;
         progressFill.style.width = `${progress}%`;
         currentQuestionSpan.textContent = answeredQuestions;
-        
-        // Log để debug
-        console.log(`Progress updated: ${answeredQuestions}/${totalQuestions} (${progress}%)`);
     } else {
         console.error('Progress elements not found');
     }
@@ -194,9 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
         radioButtons.forEach(radio => {
             radio.addEventListener('change', updateProgress);
         });
-        console.log(`Added event listeners to ${radioButtons.length} radio buttons`);
         updateProgress(); // Cập nhật ngay khi trang tải xong
     }, 500);
+
+    const audio = document.getElementById('background-audio');
+    audio.play();
 });
 
 function showModal(title, message, onConfirm) {
